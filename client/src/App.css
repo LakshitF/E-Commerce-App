@@ -1,0 +1,35 @@
+.gridcontainer {
+display: inline-grid;
+grid-template-columns: auto auto auto;
+background-color: #ffffff;
+padding: 10px;
+}
+
+.griditem {
+box-shadow: 3px 3px 2px grey;
+background-color: rgba(255, 255, 255, 0.8);
+border: 0.2px solid rgba(255, 255, 255, 0.6);
+padding: 15px;
+font-size: 20px;
+margin:10px 20px 20px 20px;
+}
+
+
+.pagination {
+  display: inline-block;
+  float:bottom;
+}
+
+.pagination a {
+  color: black;
+  float: bottom;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
