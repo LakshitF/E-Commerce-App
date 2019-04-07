@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
-import '../main.css';
+import '../css/main.css';
 class AddProduct extends Component {
   render() {
     return (

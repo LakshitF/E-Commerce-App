@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
-import '../main.css';
+import '../css/main.css';
 import '../App.css';
 import axios from 'axios';
 import BrowserRouter from 'react-router-dom';
@@ -125,7 +125,7 @@ class Shop extends Component {
         {items}
         </div>
       </div>
-      <div className="pagination" style={{marginLeft:'auto',marginRight:'auto', width: 60}}>
+      <div className="pagination" style={{marginLeft:'auto',marginRight:'auto', width: 60, position: 'absolute',bottom:0}}>
         <a ><NavLink to={`/shop/?page=${this.state.previousPage}&sort=${this.state.sort}`}>{this.state.previousPage}</NavLink></a>
         <a><NavLink to={`/shop/?page=${this.state.currentPage}&sort=${this.state.sort}` }>{this.state.currentPage}</NavLink></a>
         <a><NavLink to={`/shop/?page=${this.state.nextPage}&sort=${this.state.sort}` }>{this.state.nextPage}</NavLink></a>

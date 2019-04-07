@@ -56,6 +56,7 @@ router.get('/cart',(req,res,next)=>{
       res.send({cart: products});
     })
     .catch(err => console.log(err));
+    res.redirect('/add-product');
 });
 
 router.post('/addToCart',(req,res,next)=>{
@@ -68,7 +69,7 @@ router.post('/addToCart',(req,res,next)=>{
   })
   .then(result=>{console.log(result); res.redirect('/shop');})
   .catch(err=>{console.log(err); console.log('not added');});
-
+  res.redirect('/shop');
 });
 
 router.post('/remove',(req,res,next)=>{

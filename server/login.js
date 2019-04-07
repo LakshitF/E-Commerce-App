@@ -19,6 +19,7 @@ router.post('/forgot',(req,res,next)=>{
       res.redirect('/login');
     }
     const token=buffer.toString('hex');
+    console.log(req.body);
     User.findOne({email:req.body.email})
     .then(user=>{
       if(!user){
@@ -31,11 +32,11 @@ router.post('/forgot',(req,res,next)=>{
 
       transporter.sendMail({
         to: req.body.email,
-          from: 'shop@node-complete.com',
+          from: 'E-Shop@node.com',
           subject: 'Password reset',
           html: `
             <p>You requested a password reset</p>
-            <p>Click this <a href="http://localhost:3000/forgot/${token}">link</a> to set a new password.</p>
+            <p>Click this <a href="http://localhost:8000/resetPass/${token}">link</a> to set a new password.</p>
           `
       })
       .then(kuch=>{
@@ -49,20 +50,16 @@ router.post('/forgot',(req,res,next)=>{
   });
 });
 
-router.post('/newPassword/:token',async(req,res,next)=>{
+
+router.post('/newPassword',async(req,res,next)=>{
   const token = req.params.token;
   let user=await User.findOne({resetToken:token});
-  if(!user){
-    console.log(user);
-    console.log('Invalid token');
-  }
-  else{
-    console.log('user with this token found');
-  }
 
-  const newpass=req.body.password;
+  const newPassword=req.body.password;
   const email=req.body.email;
-  const passToken=req.body.token;
+  const passToken=token;
+
+  console.log('passtoken is ',passToken);
   let resetUser;
 
   User.findOne({
@@ -71,6 +68,7 @@ router.post('/newPassword/:token',async(req,res,next)=>{
   })
     .then(user => {
       resetUser = user;
+      console.log('user with this token found ',user);
       return bcrypt.hash(newPassword, 12);
     })
     .then(hashedPassword => {
@@ -79,10 +77,8 @@ router.post('/newPassword/:token',async(req,res,next)=>{
       resetUser.resetTokenExpiration = undefined;
       return resetUser.save();
     })
-    .then(result => {
-      res.redirect('/login');
-    })
     .catch(err => {
+      console.log('Invalid token');
       console.log(err);
     });
 });

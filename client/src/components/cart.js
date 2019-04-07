@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
-import '../main.css';
+import '../css/main.css';
 import '../App.css';
 import axios from 'axios';
 
@@ -15,7 +15,7 @@ function Product(props) {
   <div className="card__content">
       <span className="product__price" style={{fontWeight:'bold'}}>${props.price}</span>
       <br></br>
-      <span>Quantity: ${props.qty}</span>
+      <span>Quantity:{props.qty}</span>
       <p className="product__description">{props.description}</p>
   </div>
   <div className="card__actions">

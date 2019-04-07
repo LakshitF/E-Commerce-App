@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
-import '../main.css';
+import '../css/main.css';
 
 class Home extends Component {
   constructor(props)
@@ -11,7 +11,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div style={ { backgroundImage: `url(require("../images/bg-01.jpg"))` } }>
           <form className="product-form" action="/login" method="POST">
               <div className="form-control">
                   <label for="title">Email</label>
@@ -20,7 +20,12 @@ class Home extends Component {
                   <input type="text" name="password"/>
               </div>
               <button type="submit">Login</button>
-              <button><NavLink to="/">Forgot Password?</NavLink></button>
+          </form>
+          <form className="product-form" action="/forgot" method="POST">
+          <a style={{marginTop:40}}>Forgot your Password? No worries! <br></br></a>
+          <label>Enter email </label>
+          <input type="text" name="email" id="email"/>
+          <button style={{marginLeft:20}} type="submit">Send Reset Link</button>
           </form>
       </div>
     );
