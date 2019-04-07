@@ -1,3 +1,3 @@
 # ShopApp2
 
-(https://img.shields.io/badge/license-MIT-blue.svg)
+![GitHub license](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.2.1&x2=0)]
