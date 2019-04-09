@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import '../css/main.css';
+import {Alert } from 'react-bootstrap';
 
 class Register extends Component {
   constructor(props)
@@ -16,6 +17,8 @@ class Register extends Component {
       return "reset";
 
     console.log('here');
+    console.log(this.state.password);
+    console.log(this.state.confirmpassword);
     return "submit";
   }
 
@@ -26,8 +29,7 @@ class Register extends Component {
   render() {
     return (
       <div>
-          <h2>Already a registered User? Sign in!</h2>
-          <form className="product-form" action="/signup" method="POST">
+          <form className="product-form" style={{marginTop:80}}action="/signup" method="POST">
               <div className="form-control">
                   <label >Username</label>
                   <input type="text" name="username" id="username"/>
@@ -38,9 +40,10 @@ class Register extends Component {
                   <label type="text">Confirm Password</label>
                   <input type="text" name="confirmpassword" onChange={this.handleInputChange}/ >
               </div>
-
               <button type={this.passHandle}>Signup</button>
           </form>
+          <a style={{marginLeft:'auto',marginRight:'auto',width:100}}>Already a registered User?</a>
+          <NavLink to="/"><button>Login</button></NavLink>
           </div>
     );
   }

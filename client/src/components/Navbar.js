@@ -40,7 +40,7 @@ class Navbar extends Component {
       label=<li className="main-header__item"><button onClick={this.handleSignout}><NavLink  to="/signout"> Sign Out </NavLink></button></li>;
     }
     else {
-      label=<li className="main-header__item"><NavLink  to="/register">Register/Login</NavLink></li>;
+      label=<li className="main-header__item"><NavLink  to="/register">Register</NavLink></li>;
     }
 
     return (

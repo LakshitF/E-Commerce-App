@@ -65,13 +65,13 @@ main {
 .form-control label,
 .form-control input {
     display: block;
-    width: 100%;
+    width: 75%;
 }
 
 .form-control input {
     border: 1px solid #3399ff;
     font: inherit;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
 button {

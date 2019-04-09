@@ -9,6 +9,7 @@ import Cart from './components/cart';
 import Reset from './components/reset';
 import ResetPass from './components/resetPass';
 import axios from 'axios';
+import ChatRoom from './components/chatRoom';
 
 class App extends Component {
   constructor(props){
@@ -27,6 +28,7 @@ class App extends Component {
         <Route exact path='/cart'component={Cart}/>
         <Route exact path='/reset'component={Reset}/>
         <Route exact path='/resetPass/:token' component={ResetPass}/>
+        <Route exact path='/chatRoom' component={ChatRoom}/>
       </div>
       </BrowserRouter>
     );

@@ -49,8 +49,9 @@ app.use(shop);
 
 mongoose.connect('mongodb+srv://ray:ray@cluster0-uzqum.mongodb.net/shop?retryWrites=tr',{useNewUrlParser:true})
   .then(result => {
-    app.listen(3000);
+    const server = app.listen(3000);
     console.log('DB connected');
+
   })
   .catch(err => {
     console.log(err);
@@ -60,3 +61,8 @@ mongoose.connect('mongodb+srv://ray:ray@cluster0-uzqum.mongodb.net/shop?retryWri
 // app.listen(3000);
 
 //
+
+// const io=require('socket.io')(server);
+// io.on('connection',socket=>{  //execue for every new client
+//     console.log('Client connected');
+// });

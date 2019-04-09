@@ -120,10 +120,10 @@ router.post('/signout',(req,res,next)=>{
 
 router.post('/signup',(req,res,next)=>{        //../ means go up one level
   //always remember, this must be an object, look at your schema
-  User.findOne({email:req.body.email})
+    User.findOne({email:req.body.email})
   .then(userDoc=>{
     if(userDoc){
-      return res.redirect('/signup');
+      return res.redirect('/login');
     }
     return bcrypt.hash(req.body.password,8)
     .then(hash=>{
@@ -136,7 +136,7 @@ router.post('/signup',(req,res,next)=>{        //../ means go up one level
   .catch(err=>{
     console.log(err);
   });
-  res.redirect('/signup');
+  res.redirect('/login');
 });
 
 module.exports=router;
