@@ -48,6 +48,13 @@ router.post('/add-product',(req,res,next)=>{        //../ means go up one level
 });
 
 router.get('/cart',(req,res,next)=>{
+
+  if(typeof req.user=='undefined'){
+    res.send({loggedIn:false});
+    console.log('here');
+    return;
+  }
+
   req.user
     .populate('cart.items.prodid')
     .execPopulate()

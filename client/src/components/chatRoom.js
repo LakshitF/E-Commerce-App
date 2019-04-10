@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import '../css/main.css';
 import {Launcher} from 'react-chat-window';
-import openSocket from 'socket.io-client';
+import OpenSocket from 'socket.io-client';
 class Chat extends Component {
   constructor() {
     super();
@@ -12,20 +12,28 @@ class Chat extends Component {
   }
 
   componentDidMount(){
-    openSocket('http://localhost:3000'); 
+    const socket=OpenSocket('http://localhost:8080/');  //addres of the port on which web socket is listening
+    socket.emit('example_message','HELLO WORLD!');
+    console.log('component mounted');
   }
 
-  _onMessageWasSent(message) {
-    this.setState({
-      messageList: [...this.state.messageList, message]
-    });
-  }
-
-  _sendMessage(text) {
+  _onMessageWasSent(text) {
     if (text.length > 0) {
       this.setState({
         messageList: [...this.state.messageList, {
           author: 'them',
+          type: 'text',
+          data: { text }
+        }]
+      });
+    }
+  }
+
+  _receiveMessage(text){
+    if (text.length > 0) {
+      this.setState({
+        messageList: [...this.state.messageList, {
+          author: 'me',
           type: 'text',
           data: { text }
         }]

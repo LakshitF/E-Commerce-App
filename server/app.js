@@ -1,5 +1,5 @@
 //Order matters ! It does--> A LOT!
-const http=require('http');
+
 const fs=require('fs');
 const express=require('express');
 const app=express(); // new convention
@@ -12,13 +12,27 @@ const mongoose=require('mongoose');
 const User = require('./models/user');
 const cors = require('cors');
 const session=require('express-session');
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:8000'}));
 const mongostore=require('connect-mongodb-session')(session);
 const murl='mongodb+srv://ray:ray@cluster0-uzqum.mongodb.net/shop';//removed retry
 const flash=require('connect-flash');
 app.use(flash()); //use this middleware anywhere in this app
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname,'static'))); //allows all files inside static folder to be linked using href
+
+//WebSockets
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+io.on('connection',function(socket){  //execue for every new client
+    console.log('Client connected');
+    socket.on('example_message', function(msg){
+    console.log('message: ' + msg);
+    });
+    socket.on('disconnect',function(){
+      console.log('User disconnected');
+    });
+});
+io.listen(8080);  
 
 const store=new mongostore({
   uri:murl,
@@ -44,6 +58,18 @@ app.use((req, res, next) => {
 }); //It's important to keep this above the other urls
 //as it is going to be used for other routes
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:8000'); //header is used to set mulitple headers
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header(
+    'Access-Control-Allow-Methods',
+    'OPTIONS, GET, POST, PUT, PATCH, DELETE'
+  );
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
+
 app.use(login);
 app.use(shop);
 
@@ -51,7 +77,6 @@ mongoose.connect('mongodb+srv://ray:ray@cluster0-uzqum.mongodb.net/shop?retryWri
   .then(result => {
     const server = app.listen(3000);
     console.log('DB connected');
-
   })
   .catch(err => {
     console.log(err);
@@ -61,8 +86,3 @@ mongoose.connect('mongodb+srv://ray:ray@cluster0-uzqum.mongodb.net/shop?retryWri
 // app.listen(3000);
 
 //
-
-// const io=require('socket.io')(server);
-// io.on('connection',socket=>{  //execue for every new client
-//     console.log('Client connected');
-// });

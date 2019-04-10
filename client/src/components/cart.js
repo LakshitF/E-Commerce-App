@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 import '../css/main.css';
 import '../App.css';
 import axios from 'axios';
-
+import {Alert} from 'react-bootstrap';
 function Product(props) {
   return (
     <div className="griditem">
@@ -33,12 +33,16 @@ class Cart extends Component {
   constructor(props)
   {
     super(props);
-    this.state={prods:[]};
+    this.state={prods:[],alert:''};
   }
 
   componentDidMount(){
     axios.get('/cart')
     .then(( {data} )=>{ //this dereferencing is super important
+      if(data.loggedIn==false){
+        this.setState({alert:'<Alert variant=danger> You must be logged in to continue! </Alert>'});
+      }
+
       this.setState({prods:data.cart});
     })
     .catch(err => {
@@ -48,25 +52,27 @@ class Cart extends Component {
 
   render()
   {
-
-    let items = this.state.prods.map((product,index)=>{
-      return (
-        <Product key={index}
-        price={product.prodid.price}
-        img={product.prodid.img}
-        title={product.prodid.title}
-        description={product.prodid.description}
-        _id={product._id}
-        qty={product.quantity}
-        />
-      );
-    });
-
-    console.log('items are');
-    console.log(items);
+    let items;
+    items='';
+    let alert=<Alert variant='danger'> You must be logged in to continue! </Alert>;
+    if (typeof this.state.prods!=='undefined'){
+      items = this.state.prods.map((product,index)=>{
+        return (
+          <Product key={index}
+          price={product.prodid.price}
+          img={product.prodid.img}
+          title={product.prodid.title}
+          description={product.prodid.description}
+          _id={product._id}
+          qty={product.quantity}
+          />
+        );
+      });
+    }
 
     return (
       <div>
+      {alert}
       <div className="gridcontainer">
         {items}
       </div>

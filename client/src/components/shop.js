@@ -113,9 +113,9 @@ class Shop extends Component {
     return (
       <div style={{display:'flex',flexDirection:'column'}}>
       <div>
-      <a style={{float:'left',padding:10}}>Sort by Price ></a>
-      <a style={{float:'left',padding:10}}><NavLink to={`/shop/?page=1&sort=1`}>Low to High</NavLink></a>
-      <a style={{float:'left',padding:10}}><NavLink to={`/shop/?page=1&sort=-1`}>High to Low</NavLink></a>
+      <a style={{float:'left',padding:10,fontWeight:'bold'}}>Sort by Price:</a>
+      <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=1`}>Low to High</NavLink></a>
+      <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=-1`}>High to Low</NavLink></a>
       </div>
       <div className="gridcontainer" style={{paddingTop:10,flex:1.1}}>
         <div style={{display:'flex',flexDirection:'row'}}>
@@ -125,7 +125,7 @@ class Shop extends Component {
         {items}
         </div>
       </div>
-      <div className="pagination" style={{marginLeft:'auto',marginRight:'auto', width: 60, position: 'absolute',bottom:0}}>
+      <div className="pagination" style={{alignSelf:'center',position: 'absolute',bottom:0}}>
         <a ><NavLink to={`/shop/?page=${this.state.previousPage}&sort=${this.state.sort}`}>{this.state.previousPage}</NavLink></a>
         <a><NavLink to={`/shop/?page=${this.state.currentPage}&sort=${this.state.sort}` }>{this.state.currentPage}</NavLink></a>
         <a><NavLink to={`/shop/?page=${this.state.nextPage}&sort=${this.state.sort}` }>{this.state.nextPage}</NavLink></a>

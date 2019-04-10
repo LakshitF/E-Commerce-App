@@ -16,7 +16,7 @@ margin:10px 20px 20px 20px;
 
 
 .pagination {
-  display: inline-block;
+  display: flex;
   float:bottom;
 }
 

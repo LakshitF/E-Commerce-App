@@ -3,7 +3,8 @@ import {Route,NavLink,BrowserRouter} from "react-router-dom";
 import Navbar from './components/Navbar';
 import Register from './components/register';
 import AddProduct from './components/add-product';
-import Home from './components/login';
+import Home from './components/home';
+import Login from './components/login';
 import Shop from './components/shop';
 import Cart from './components/cart';
 import Reset from './components/reset';
@@ -21,7 +22,7 @@ class App extends Component {
       <BrowserRouter>
       <div className="App">
         <Navbar/>
-        <Route exact path='/'component={Home}/>
+        <Route exact path='/login'component={Login}/>
         <Route exact path='/register'component={Register}/>
         <Route exact path='/add-product'component={AddProduct}/>
         <Route exact path='/shop'component={Shop}/>
@@ -29,6 +30,7 @@ class App extends Component {
         <Route exact path='/reset'component={Reset}/>
         <Route exact path='/resetPass/:token' component={ResetPass}/>
         <Route exact path='/chatRoom' component={ChatRoom}/>
+        <Route exact path='/' component={Home}/>
       </div>
       </BrowserRouter>
     );

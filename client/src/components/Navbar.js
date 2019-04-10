@@ -35,12 +35,14 @@ class Navbar extends Component {
 
   render() {
     let label;
+    let label2;
     if(this.state.log)
     {
-      label=<li className="main-header__item"><button onClick={this.handleSignout}><NavLink  to="/signout"> Sign Out </NavLink></button></li>;
+      label=<li className="main-header__item" style={{alignSelf:'right'}}><button onClick={this.handleSignout}><NavLink  to="/signout"> Sign Out </NavLink></button></li>;
     }
     else {
-      label=<li className="main-header__item"><NavLink  to="/register">Register</NavLink></li>;
+      label=<li className="main-header__item" style={{alignSelf:'right',marginLeft:900}}><NavLink  to="/register">Register</NavLink></li>;
+      label2=<li className="main-header__item" style={{alignSelf:'right'}}><NavLink  to="/">Login</NavLink></li>;
     }
 
     return (
@@ -50,9 +52,8 @@ class Navbar extends Component {
                     <li className="main-header__item"><NavLink to="/shop">Shop</NavLink></li>
                     <li className="main-header__item"><NavLink  to="/add-product">Add Product</NavLink></li>
                     <li className="main-header__item"><NavLink  to="/cart">My CART</NavLink></li>
-                </ul>
-                <ul className="main-header__item-list2">
-                  {label}
+                    {label}
+                    {label2}
                 </ul>
             </nav>
         </header>
