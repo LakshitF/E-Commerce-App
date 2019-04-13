@@ -13,10 +13,11 @@ class Login extends Component {
   render() {
     return (
       <div style={{width: '100%',
-      height: '1000px',
+      height: '900px',
       backgroundImage:"url("+bg+")",
-      backgroundSize: 'cover'}}>
-          <form style={{marginTop:30}} className="product-form" action="/login" method="POST">
+      backgroundSize: 'cover',display:'flex'}}>
+          <div style={{marginTop:50,alignSelf:'left',marginLeft:200,border:'1 px solid white',borderRadius:'3 px',backgroundImage:'none !important'}} >
+          <form className="product-form" action="/login" method="POST">
               <div className="form-control">
                   <label for="title">Email</label>
                   <input type="text" name="email" id="email"/>
@@ -25,7 +26,9 @@ class Login extends Component {
               </div>
               <button type="submit">Login</button>
           </form>
-          <form style={{marginTop:50}} className="product-form" action="/forgot" method="POST">
+          </div>
+
+          <form style={{marginTop:50,alignSelf:'right',marginRight:200}}  action="/forgot" method="POST">
             <a  style={{ display:'inline-block',marginTop:20,marginBottom:20}}>Forgot your Password? No worries!</a> <br></br>
             <label>Enter email </label>
             <input type="text" name="email" id="email"/>

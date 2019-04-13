@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import '../css/main.css';
 import {Alert } from 'react-bootstrap';
+let bg=require('../images/bg-01.jpg');
 
 class Register extends Component {
   constructor(props)
@@ -28,8 +29,10 @@ class Register extends Component {
 
   render() {
     return (
-      <div>
-          <form className="product-form" style={{marginTop:80}}action="/signup" method="POST">
+      <div style={{width: '100%',height:'800px',
+      backgroundImage:"url("+bg+")",
+      backgroundSize: '100%',display:'flex',flexDirection:'column'}}>
+          <form className="product-form" action="/signup" method="POST">
               <div className="form-control">
                   <label >Username</label>
                   <input type="text" name="username" id="username"/>
@@ -42,9 +45,9 @@ class Register extends Component {
               </div>
               <button type={this.passHandle}>Signup</button>
           </form>
-          <a style={{marginLeft:'auto',marginRight:'auto',width:100}}>Already a registered User?</a>
+          <a style={{marginLeft:'35%'}}>Already a registered User?</a><br></br>
           <NavLink to="/"><button>Login</button></NavLink>
-          </div>
+        </div>
     );
   }
 }

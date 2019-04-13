@@ -57,7 +57,7 @@ main {
 .product-form {
     width: 25rem;
     max-width: 90%;
-    margin: auto;
+    align-self:center;
 }
 .form-control {
     margin: 1rem 0;

@@ -4,6 +4,7 @@ import '../css/main.css';
 class AddProduct extends Component {
   render() {
     return (
+            <div style={{display:'flex',flexDirection:'column'}}>
               <form className="product-form" action="/add-product" method="POST">
                   <div className="form-control">
                       <label for="title">Title</label>
@@ -20,6 +21,7 @@ class AddProduct extends Component {
 
                   <button type="submit">Add Product</button>
               </form>
+            </div>
     );
   }
 }

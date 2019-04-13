@@ -42,7 +42,7 @@ class Navbar extends Component {
     }
     else {
       label=<li className="main-header__item" style={{alignSelf:'right',marginLeft:900}}><NavLink  to="/register">Register</NavLink></li>;
-      label2=<li className="main-header__item" style={{alignSelf:'right'}}><NavLink  to="/">Login</NavLink></li>;
+      label2=<li className="main-header__item" style={{alignSelf:'right'}}><NavLink  to="/login">Login</NavLink></li>;
     }
 
     return (
