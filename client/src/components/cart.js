@@ -4,6 +4,7 @@ import '../css/main.css';
 import '../App.css';
 import axios from 'axios';
 import {Alert} from 'react-bootstrap';
+
 function Product(props) {
   return (
     <div className="griditem">
@@ -33,7 +34,8 @@ class Cart extends Component {
   constructor(props)
   {
     super(props);
-    this.state={prods:[],alert:''};
+    this.state={prods:[],alert:'',total:0};
+    this.getsum=this.getsum.bind(this);
   }
 
   componentDidMount(){
@@ -41,6 +43,9 @@ class Cart extends Component {
     .then(( {data} )=>{ //this dereferencing is super important
       if(data.loggedIn==false){
         this.setState({alert:'<Alert variant=danger> You must be logged in to continue! </Alert>'});
+      }
+      else{
+        this.setState({alert:''});
       }
 
       this.setState({prods:data.cart});
@@ -50,6 +55,17 @@ class Cart extends Component {
       });
   }
 
+  getsum(){
+    let l=this.state.prods.length;
+    let total=0;
+    for(let i=0;i<l;i++)
+    {
+      total=total+ (this.state.prods[i].prodid.price * this.state.prods[i].quantity); //pay attention. From next time, name them well.
+
+    }
+    this.setState({total:total});
+    console.log(this.state.total);
+  }
   render()
   {
     let items;
@@ -71,11 +87,13 @@ class Cart extends Component {
     }
 
     return (
-      <div>
+      <div style={{display:'flex',flexDirection:'column'}}>
       {alert}
-      <div className="gridcontainer">
+      <div className="gridcontainer" style={{paddingTop:10,marginRight:400}}>
         {items}
       </div>
+      <button onClick={this.getsum} style={{alignSelf:'center'}}>Get Cart total</button>
+      <a style={{alignSelf:'center',position: 'absolute',bottom:0}}>Cart total {this.state.total}</a>
       </div>
     );
   }

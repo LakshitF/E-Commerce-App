@@ -5,7 +5,7 @@ const User=require('./models/user.js');
 const items_per_page=3;
 
 router.get('/shop',(req,res,next)=>{  //react me bhi handle pass hua
-  console.log(req.query);
+
   const page= +req.query.page||1;  //?page=1,,if req.query.handle--> gets
   const k= +req.query.sort||0;
 
@@ -51,8 +51,8 @@ router.get('/cart',(req,res,next)=>{
 
   if(typeof req.user=='undefined'){
     res.send({loggedIn:false});
-    console.log('here');
-    return;
+    console.log('not logged in');
+    return next();
   }
 
   req.user
@@ -60,28 +60,27 @@ router.get('/cart',(req,res,next)=>{
     .execPopulate()
     .then(user => {
       const products = user.cart.items;
-      res.send({cart: products});
+      res.send({cart: products,loggedIn:true});
+
     })
     .catch(err => console.log(err));
-    res.redirect('/add-product');
+
 });
 
 router.post('/addToCart',(req,res,next)=>{
   let id=req.body.productId;
-  console.log(req.user);
-  console.log(id);
+
   Product.findById(id)  //static methods are acessed using classname
   .then( addP =>{
     return req.user.addToCart(addP);
   })
-  .then(result=>{console.log(result); res.redirect('/shop');})
   .catch(err=>{console.log(err); console.log('not added');});
   res.redirect('/shop');
 });
 
 router.post('/remove',(req,res,next)=>{
   let id=req.body.productId;
-  console.log(id);
+  console.log("removed");
   req.user.removeFromCart(id)
   .then(result=>{res.redirect('/cart');})
   .catch(err=>{

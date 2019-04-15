@@ -38,7 +38,7 @@ class Navbar extends Component {
     let label2;
     if(this.state.log)
     {
-      label=<li className="main-header__item" style={{alignSelf:'right'}}><button onClick={this.handleSignout}><NavLink  to="/signout"> Sign Out </NavLink></button></li>;
+      label=<NavLink  to="/signout"><li className="main-header__item" style={{alignSelf:'right',marginLeft:900}}><button onClick={this.handleSignout}> Sign Out </button></li></NavLink>;
     }
     else {
       label=<li className="main-header__item" style={{alignSelf:'right',marginLeft:900}}><NavLink  to="/register">Register</NavLink></li>;

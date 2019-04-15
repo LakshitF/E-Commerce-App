@@ -8,19 +8,21 @@ class Register extends Component {
   constructor(props)
   {
     super(props);
-    this.state={email:'',password:'',confirmpassword:''};
+    this.state={email:'',password:'',confirmpassword:'',action:'submit'};
     this.handleInputChange=this.handleInputChange.bind(this);
     this.passHandle=this.passHandle.bind(this);
+
   }
 
   passHandle(event){
+    event.preventDefault();
     if(this.state.password!==this.state.confirmpassword)
-      return "reset";
+      this.setState({action:'reset'});
 
     console.log('here');
     console.log(this.state.password);
     console.log(this.state.confirmpassword);
-    return "submit";
+    this.setState({action:'submit'});
   }
 
   handleInputChange=event=>{
@@ -43,7 +45,7 @@ class Register extends Component {
                   <label type="text">Confirm Password</label>
                   <input type="text" name="confirmpassword" onChange={this.handleInputChange}/ >
               </div>
-              <button type={this.passHandle}>Signup</button>
+              <button onClick={this.passHandle} type={this.state.action}>Signup</button>
           </form>
           <a style={{marginLeft:'35%'}}>Already a registered User?</a><br></br>
           <NavLink to="/"><button>Login</button></NavLink>
