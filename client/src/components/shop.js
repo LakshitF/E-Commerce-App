@@ -9,22 +9,22 @@ import queryString from 'query-string';
 function Product(props) {
   return (
     <div className="griditem">
-  <article className="productitem">
-    <h3 style={{justifyContent:'center'}}>{props.title}</h3>
-    <div className="card__image">
-        <img src={props.img} width={190} height={230}/>
+    <div>
+        <img src={props.img} width={190} height={250}/>
     </div>
-  <div className="card__content">
-      <span className="product__price" style={{fontWeight:'bold'}}>${props.price}</span>
-      <p className="product__description">{props.description}</p>
+  <div style={{textAlign:'center'}}>
+      <span style={{display:'inline-block',fontSize:22}}>{props.title}</span>
+      <br></br>
   </div>
+  <span style={{marginBottom:'10px',fontSize:18}}>{props.description}</span>
+  <br></br>
+  <span style={{fontSize:20}}>${props.price}</span>
   <div className="card__actions">
     <form action="/addToCart" method="post">
       <button className="btn" type="submit">Add to Cart</button>
       <input type="hidden" name="productId" value={props._id} />
     </form>
   </div>
-  </article>
   </div>);
 }
 
@@ -112,20 +112,15 @@ class Shop extends Component {
 
     return (
       <div style={{display:'flex',flexDirection:'column'}}>
-      <div>
+      <div style={{flexDirection:'column'}}>
       <a style={{float:'left',padding:10,fontWeight:'bold'}}>Sort by Price:</a>
       <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=1`}>Low to High</NavLink></a>
       <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=-1`}>High to Low</NavLink></a>
       </div>
-      <div className="gridcontainer" style={{paddingTop:10,flex:1.1}}>
-        <div style={{display:'flex',flexDirection:'row'}}>
-          <div>
-            <img src=""/>
-          </div>
+      <div className="gridcontainer" style={{paddingTop:10,flexDirection:'column'}}>
         {items}
-        </div>
       </div>
-      <div className="pagination" style={{alignSelf:'center',position: 'absolute',bottom:0}}>
+      <div className="pagination" style={{alignSelf:'center'}}>
         <a ><NavLink to={`/shop/?page=${this.state.previousPage}&sort=${this.state.sort}`}>{this.state.previousPage}</NavLink></a>
         <a><NavLink to={`/shop/?page=${this.state.currentPage}&sort=${this.state.sort}` }>{this.state.currentPage}</NavLink></a>
         <a><NavLink to={`/shop/?page=${this.state.nextPage}&sort=${this.state.sort}` }>{this.state.nextPage}</NavLink></a>

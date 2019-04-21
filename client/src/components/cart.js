@@ -8,24 +8,22 @@ import {Alert} from 'react-bootstrap';
 function Product(props) {
   return (
     <div className="griditem">
-  <article className="productitem">
-    <h3 style={{justifyContent:'center',alignItems: 'center'}}>{props.title}</h3>
-    <div className="card__image">
-        <img src={props.img} width={190} height={230}/>
+    <div>
+        <img src={props.img} width={190} height={250}/>
     </div>
-  <div className="card__content">
-      <span className="product__price" style={{fontWeight:'bold'}}>${props.price}</span>
+  <div style={{textAlign:'center'}}>
+      <span style={{display:'inline-block',fontSize:22}}>{props.title}</span>
       <br></br>
-      <span>Quantity:{props.qty}</span>
-      <p className="product__description">{props.description}</p>
   </div>
+  <span style={{marginBottom:'10px',fontSize:18}}>{props.qty}</span>
+  <br></br>
+  <span style={{fontSize:20}}>${props.price}</span>
   <div className="card__actions">
     <form action="/remove" method="post">
       <button className="btn" type="submit">Remove from Cart</button>
       <input type="hidden" name="productId" value={props._id} />
     </form>
   </div>
-  </article>
   </div>);
 }
 

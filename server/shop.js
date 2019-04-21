@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 const Product=require('./models/product.js');
 const User=require('./models/user.js');
-const items_per_page=3;
+const items_per_page=8;
 
 router.get('/shop',(req,res,next)=>{  //react me bhi handle pass hua
 
