@@ -10,16 +10,14 @@ function Product(props) {
   return (
     <div className="griditem">
     <div>
-        <img src={props.img} width={190} height={250}/>
+        <img src={props.img} width={175} height={250}/>
     </div>
   <div style={{textAlign:'center'}}>
-      <span style={{display:'inline-block',fontSize:22}}>{props.title}</span>
+      <span style={{display:'inline-block',fontSize:20,color:'blue'}}>{props.title}</span>
       <br></br>
+      <span style={{fontSize:22,display:'inline-block'}}>${props.price}</span>
   </div>
-  <span style={{marginBottom:'10px',fontSize:18}}>{props.description}</span>
-  <br></br>
-  <span style={{fontSize:20}}>${props.price}</span>
-  <div className="card__actions">
+  <div className="card__actions" style={{marginBottom:'5px'}}>
     <form action="/addToCart" method="post">
       <button className="btn" type="submit">Add to Cart</button>
       <input type="hidden" name="productId" value={props._id} />
@@ -111,19 +109,26 @@ class Shop extends Component {
     });
 
     return (
+      <div>
+
+      <div style={{display:'flex',flexDiretion:'column'}}>
+      <span class="sidebutton">Category</span>
+      </div>
+
       <div style={{display:'flex',flexDirection:'column'}}>
-      <div style={{flexDirection:'column'}}>
-      <a style={{float:'left',padding:10,fontWeight:'bold'}}>Sort by Price:</a>
-      <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=1`}>Low to High</NavLink></a>
-      <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=-1`}>High to Low</NavLink></a>
-      </div>
-      <div className="gridcontainer" style={{paddingTop:10,flexDirection:'column'}}>
-        {items}
-      </div>
-      <div className="pagination" style={{alignSelf:'center'}}>
-        <a ><NavLink to={`/shop/?page=${this.state.previousPage}&sort=${this.state.sort}`}>{this.state.previousPage}</NavLink></a>
-        <a><NavLink to={`/shop/?page=${this.state.currentPage}&sort=${this.state.sort}` }>{this.state.currentPage}</NavLink></a>
-        <a><NavLink to={`/shop/?page=${this.state.nextPage}&sort=${this.state.sort}` }>{this.state.nextPage}</NavLink></a>
+        <div style={{display:'flex',flexDirection:'row'}}>
+        <a style={{float:'left',padding:10,fontWeight:'bold'}}>Sort by Price:</a>
+        <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=1`}>Low to High</NavLink></a>
+        <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=-1`}>High to Low</NavLink></a>
+        </div>
+        <div className="gridcontainer" style={{paddingTop:10}}>
+          {items}
+        </div>
+        <div className="pagination" style={{alignSelf:'center'}}>
+          <a ><NavLink to={`/shop/?page=${this.state.previousPage}&sort=${this.state.sort}`}>{this.state.previousPage}</NavLink></a>
+          <a><NavLink to={`/shop/?page=${this.state.currentPage}&sort=${this.state.sort}` }>{this.state.currentPage}</NavLink></a>
+          <a><NavLink to={`/shop/?page=${this.state.nextPage}&sort=${this.state.sort}` }>{this.state.nextPage}</NavLink></a>
+        </div>
       </div>
       </div>
     );

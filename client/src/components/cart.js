@@ -15,9 +15,9 @@ function Product(props) {
       <span style={{display:'inline-block',fontSize:22}}>{props.title}</span>
       <br></br>
   </div>
-  <span style={{marginBottom:'10px',fontSize:18}}>{props.qty}</span>
+  <span style={{marginBottom:'10px',fontSize:18}}>Quantity: {props.qty}</span>
   <br></br>
-  <span style={{fontSize:20}}>${props.price}</span>
+  <span style={{fontSize:20}}>Price: ${props.price}</span>
   <div className="card__actions">
     <form action="/remove" method="post">
       <button className="btn" type="submit">Remove from Cart</button>
@@ -87,7 +87,7 @@ class Cart extends Component {
     return (
       <div style={{display:'flex',flexDirection:'column'}}>
       {alert}
-      <div className="gridcontainer" style={{paddingTop:10,marginRight:400}}>
+      <div className="gridcontainer" style={{paddingTop:10}}>
         {items}
       </div>
       <button onClick={this.getsum} style={{alignSelf:'center'}}>Get Cart total</button>

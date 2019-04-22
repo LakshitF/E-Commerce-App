@@ -32,7 +32,7 @@ class App extends Component {
         <Route exact path='/reset'component={Reset}/>
         <Route exact path='/resetPass/:token' component={ResetPass}/>
         <Route exact path='/chatRoom' component={ChatRoom}/>
-        <Route exact path='/' component={Home}/>
+        <Route exact path='/home' component={Home}/> 
       </div>
       </BrowserRouter>
     );

@@ -38,23 +38,21 @@ class Navbar extends Component {
     let label2;
     if(this.state.log)
     {
-      label=<NavLink  to="/signout"><li className="main-header__item" style={{alignSelf:'right',marginLeft:900}}><button onClick={this.handleSignout}> Sign Out </button></li></NavLink>;
+      label=<NavLink  to="/signout"><span className="main-header__item" style={{alignSelf:'right',marginLeft:900}}><button onClick={this.handleSignout}> Sign Out </button></span></NavLink>;
     }
     else {
-      label=<li className="main-header__item" style={{alignSelf:'right',marginLeft:900}}><NavLink  to="/register">Register</NavLink></li>;
-      label2=<li className="main-header__item" style={{alignSelf:'right'}}><NavLink  to="/login">Login</NavLink></li>;
+      label=<span className="main-header__item" style={{alignSelf:'right',marginLeft:900}}><NavLink  to="/register">Register</NavLink></span>;
+      label2=<span className="main-header__item" style={{alignSelf:'right'}}><NavLink  to="/login">Login</NavLink></span>;
     }
 
     return (
         <header className="main-header">
             <nav className="main-header__nav">
-                <ul className="main-header__item-list">
-                    <li className="main-header__item"><NavLink to="/shop">Shop</NavLink></li>
-                    <li className="main-header__item"><NavLink  to="/add-product">Add Product</NavLink></li>
-                    <li className="main-header__item"><NavLink  to="/cart">My CART</NavLink></li>
+                    <span className="main-header__item"><NavLink to="/shop">Shop</NavLink></span>
+                    <span className="main-header__item"><NavLink  to="/add-product">Add Product</NavLink></span>
+                    <span className="main-header__item"><NavLink  to="/cart">My CART</NavLink></span>
                     {label}
                     {label2}
-                </ul>
             </nav>
         </header>
     );
