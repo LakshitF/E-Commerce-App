@@ -11,7 +11,7 @@ class ResetPass extends Component {
   }
 
   componentDidMount(){
-    const token=this.props.match.params;
+    const {token}=this.props.match.params;  //very important to destructure
     console.log(token);
     this.setState({token:token});
   }
@@ -24,6 +24,7 @@ class ResetPass extends Component {
                   <input type="text" name="email"/>
                   <label >New Password</label>
                   <input type="text" name="password" id="password"/>
+                  <input type="hidden" name="token" id="token" value={this.state.token}/> //set the value in the value tag lol!
               </div>
               <button type="submit">Update Password</button>
           </form>

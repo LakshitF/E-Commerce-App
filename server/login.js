@@ -52,14 +52,12 @@ router.post('/forgot',(req,res,next)=>{
 
 
 router.post('/newPassword',async(req,res,next)=>{
-  const token = req.params.token;
-  let user=await User.findOne({resetToken:token});
-
+  const passToken = req.body.token;
+  let user=await User.findOne({resetToken:passToken});
   const newPassword=req.body.password;
   const email=req.body.email;
-  const passToken=token;
 
-  console.log('passtoken is ',passToken);
+  console.log('passtoken is ',req.body.token);
   let resetUser;
 
   User.findOne({
