@@ -101,6 +101,8 @@ router.post('/login',(req,res,next)=>{
             return res.redirect('/shop');  //render page again
           });
         }
+        else
+            res.redirect('/login');
       });
     })
     .catch(err => console.log(err));

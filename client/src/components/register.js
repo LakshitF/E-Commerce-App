@@ -1,23 +1,29 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import '../css/main.css';
-import {Alert } from 'react-bootstrap';
+import {Alert} from 'react-bootstrap';
 let bg=require('../images/bg-01.jpg');
 
 class Register extends Component {
   constructor(props)
   {
     super(props);
-    this.state={email:'',password:'',confirmpassword:'',action:'submit'};
+    this.state={email:'',password:'',confirmpassword:'',action:'submit',done:false};
     this.handleInputChange=this.handleInputChange.bind(this);
     this.passHandle=this.passHandle.bind(this);
 
   }
 
   passHandle(event){
+
+    if(this.state.action=='submit')
+    {
+      return;
+    }
     event.preventDefault();
     if(this.state.password!==this.state.confirmpassword)
-      this.setState({action:'reset'});
+      this.setState({action:'reset',done:true});
+
 
     console.log('here');
     console.log(this.state.password);
@@ -30,10 +36,16 @@ class Register extends Component {
   }
 
   render() {
+    let alert;
+    if(this.state.done==true)
+    {
+      alert=<Alert variant="success">Successfully signed up! Now please log in with your credentials.</Alert>;
+    }
     return (
       <div style={{width: '100%',height:'800px',
       backgroundImage:"url("+bg+")",
       backgroundSize: '100%',display:'flex',flexDirection:'column'}}>
+      {alert}
           <form className="product-form" action="/signup" method="POST">
               <div className="form-control">
                   <label >Username</label>
@@ -46,9 +58,10 @@ class Register extends Component {
                   <input type="text" name="confirmpassword" onChange={this.handleInputChange}/ >
               </div>
               <button onClick={this.passHandle} type={this.state.action}>Signup</button>
+              <a style={{marginTop:20,marginBottom:20}}>Already a registered User?</a><br></br>
+              <NavLink to="/"><button>Login</button></NavLink>
           </form>
-          <a style={{marginLeft:'35%'}}>Already a registered User?</a><br></br>
-          <NavLink to="/"><button>Login</button></NavLink>
+
         </div>
     );
   }

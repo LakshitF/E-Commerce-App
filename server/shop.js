@@ -2,13 +2,22 @@ const express=require('express');
 const router=express.Router();
 const Product=require('./models/product.js');
 const User=require('./models/user.js');
-const items_per_page=8;
+const items_per_page=6;
+
+function ensureAuth(req,res,next){
+  if(req.session.isLoggedIn){
+        return next();
+  }
+  else
+  {
+    console.log('You must be logged in to do this!');
+  }
+}//Similarly can add admin validation. All such validation should be done from the server side or the user can easily change such local variables
+
 
 router.get('/shop',(req,res,next)=>{  //react me bhi handle pass hua
-
   const page= +req.query.page||1;  //?page=1,,if req.query.handle--> gets
   const k= +req.query.sort||0;
-
   Product.find()
     .countDocuments()
     .then(numProducts=>{
@@ -35,7 +44,7 @@ router.get('/shop',(req,res,next)=>{  //react me bhi handle pass hua
 });
 
 //name in html file of input was title
-router.post('/add-product',(req,res,next)=>{        //../ means go up one level
+router.post('/add-product',ensureAuth,(req,res,next)=>{        //../ means go up one level
   const product=new Product({title:req.body.title,price:req.body.price,description:req.body.description,img:req.body.img});
   product.save()
     .then(result=>{
@@ -67,7 +76,7 @@ router.get('/cart',(req,res,next)=>{
 
 });
 
-router.post('/addToCart',(req,res,next)=>{
+router.post('/addToCart',ensureAuth,(req,res,next)=>{
   let id=req.body.productId;
 
   Product.findById(id)  //static methods are acessed using classname
@@ -78,7 +87,7 @@ router.post('/addToCart',(req,res,next)=>{
   res.redirect('/shop');
 });
 
-router.post('/remove',(req,res,next)=>{
+router.post('/remove',ensureAuth,(req,res,next)=>{
   let id=req.body.productId;
   console.log("removed");
   req.user.removeFromCart(id)

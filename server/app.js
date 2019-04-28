@@ -1,5 +1,7 @@
 //Order matters ! It does--> A LOT!
-
+const graphqlSchema=require('./graphql/schema');
+const graphqlHttp=require('express-graphql');
+const graphqlResolver=equire('./graphql/resolver');
 const fs=require('fs');
 const express=require('express');
 const app=express(); // new convention
@@ -19,20 +21,6 @@ const flash=require('connect-flash');
 app.use(flash()); //use this middleware anywhere in this app
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname,'static'))); //allows all files inside static folder to be linked using href
-
-//WebSockets
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-io.on('connection',function(socket){  //execue for every new client
-    console.log('Client connected');
-    socket.on('example_message', function(msg){
-    console.log('message: ' + msg);
-    });
-    socket.on('disconnect',function(){
-      console.log('User disconnected');
-    });
-});
-io.listen(8080);  
 
 const store=new mongostore({
   uri:murl,
@@ -69,7 +57,11 @@ app.use((req, res, next) => {
   next();
 });
 
-
+app.use('./graphql',graphqlHttp({
+    schema:graphqlSchema,
+    rootValue:graphqlResolver
+  })
+);
 app.use(login);
 app.use(shop);
 
@@ -81,8 +73,3 @@ mongoose.connect('mongodb+srv://ray:ray@cluster0-uzqum.mongodb.net/shop?retryWri
   .catch(err => {
     console.log(err);
   });
-
-// const server=http.createServer(app);
-// app.listen(3000);
-
-//
