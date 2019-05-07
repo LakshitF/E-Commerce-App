@@ -94,7 +94,7 @@ router.post('/login',(req,res,next)=>{
         if(result){
           req.session.isLoggedIn = true;
           req.session.user = user;
-
+          req.session.admin=true;
           console.log('Successfully logged in',req.session.user._id);
           req.session.save(err => {
             console.log(err);

@@ -1,7 +1,5 @@
 //Order matters ! It does--> A LOT!
-const graphqlSchema=require('./graphql/schema');
-const graphqlHttp=require('express-graphql');
-const graphqlResolver=equire('./graphql/resolver');
+
 const fs=require('fs');
 const express=require('express');
 const app=express(); // new convention
@@ -57,11 +55,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('./graphql',graphqlHttp({
-    schema:graphqlSchema,
-    rootValue:graphqlResolver
-  })
-);
+
 app.use(login);
 app.use(shop);
 

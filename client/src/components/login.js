@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import '../css/main.css';
-let bg=require('../images/bg-01.jpg');
+let bg=require('../images/backlogin.jpg');
 
 class Login extends Component {
   constructor(props)

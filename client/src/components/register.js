@@ -57,9 +57,9 @@ class Register extends Component {
                   <label type="text">Confirm Password</label>
                   <input type="text" name="confirmpassword" onChange={this.handleInputChange}/ >
               </div>
-              <button onClick={this.passHandle} type={this.state.action}>Signup</button>
-              <a style={{marginTop:20,marginBottom:20}}>Already a registered User?</a><br></br>
-              <NavLink to="/"><button>Login</button></NavLink>
+              <button onClick={this.passHandle} type={this.state.action}>Signup</button><br></br><br></br>
+              <a style={{marginTop:20,marginBottom:20}}>Already a registered User?</a><br></br><br></br>
+              <NavLink to="/login"><button>Login</button></NavLink>
           </form>
 
         </div>

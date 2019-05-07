@@ -14,6 +14,15 @@ function ensureAuth(req,res,next){
   }
 }//Similarly can add admin validation. All such validation should be done from the server side or the user can easily change such local variables
 
+function ensureAdmin(req,res,next){
+  if(req.session.admin){
+        return next();
+  }
+  else
+  {
+    console.log('You must be an Administrator in to do this!');
+  }
+}
 
 router.get('/shop',(req,res,next)=>{  //react me bhi handle pass hua
   const page= +req.query.page||1;  //?page=1,,if req.query.handle--> gets
@@ -56,7 +65,7 @@ router.post('/add-product',ensureAuth,(req,res,next)=>{        //../ means go up
     res.redirect('/add-product');
 });
 
-router.get('/cart',(req,res,next)=>{
+router.get('/cart',ensureAuth,(req,res,next)=>{
 
   if(typeof req.user=='undefined'){
     res.send({loggedIn:false});

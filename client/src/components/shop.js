@@ -10,7 +10,7 @@ function Product(props) {
   return (
     <div className="griditem">
     <div>
-        <img src={props.img} width={175} height={250}/>
+        <img src={props.img} width={140} height={210}/>
     </div>
   <div style={{textAlign:'center'}}>
       <span style={{display:'inline-block',fontSize:20,color:'blue'}}>{props.title}</span>
@@ -111,11 +111,11 @@ class Shop extends Component {
     return (
       <div>
 
-      <div style={{display:'flex',flexDiretion:'column'}}>
+      <div style={{display:'flex',flexDirection:'column'}}>
       <span class="sidebutton">Category</span>
       </div>
 
-      <div style={{display:'flex',flexDirection:'column'}}>
+      <div style={{display:'flex',flexDirection:'column',marginLeft:250}}>
         <div style={{display:'flex',flexDirection:'row'}}>
         <a style={{float:'left',padding:10,fontWeight:'bold'}}>Sort by Price:</a>
         <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=1`}>Low to High</NavLink></a>
@@ -130,6 +130,7 @@ class Shop extends Component {
           <a><NavLink to={`/shop/?page=${this.state.nextPage}&sort=${this.state.sort}` }>{this.state.nextPage}</NavLink></a>
         </div>
       </div>
+
       </div>
     );
   }
