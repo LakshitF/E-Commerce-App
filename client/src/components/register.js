@@ -1,68 +1,98 @@
-import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
-import '../css/main.css';
-import {Alert} from 'react-bootstrap';
-let bg=require('../images/bg-01.jpg');
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import "../css/main.css";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 
 class Register extends Component {
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
-    this.state={email:'',password:'',confirmpassword:'',action:'submit',done:false};
-    this.handleInputChange=this.handleInputChange.bind(this);
-    this.passHandle=this.passHandle.bind(this);
-
+    this.state = {
+      email: "",
+      password: "",
+      confirmpassword: "",
+      action: "reset",
+      done: false
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.passHandle = this.passHandle.bind(this);
   }
 
-  passHandle(event){
-
-    if(this.state.action=='submit')
-    {
-      return;
+  passHandle(event) {
+    if (this.state.action == "submit") {
+      return; //Imp to check this or we end up calling set state everytime
     }
     event.preventDefault();
-    if(this.state.password!==this.state.confirmpassword)
-      this.setState({action:'reset',done:true});
-
-
-    console.log('here');
+    if (this.state.password !== this.state.confirmpassword) {
+      this.setState({ action: "reset", done: true });
+      return;
+    }
     console.log(this.state.password);
     console.log(this.state.confirmpassword);
-    this.setState({action:'submit'});
+    this.setState({ action: "submit" });
   }
 
-  handleInputChange=event=>{
-    this.setState({[event.target.name]:event.target.value});
-  }
+  handleInputChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   render() {
-    let alert;
-    if(this.state.done==true)
-    {
-      alert=<Alert variant="success">Successfully signed up! Now please log in with your credentials.</Alert>;
-    }
     return (
-      <div style={{width: '100%',height:'800px',
-      backgroundImage:"url("+bg+")",
-      backgroundSize: '100%',display:'flex',flexDirection:'column'}}>
-      {alert}
-          <form className="product-form" action="/signup" method="POST">
-              <div className="form-control">
-                  <label >Username</label>
-                  <input type="text" name="username" id="username"/>
-                  <label>Email</label>
-                  <input type="text" name="email" id="email" onChange={this.handleInputChange}/>
-                  <label  type="text">Password</label>
-                  <input type="text" name="password" onChange={this.handleInputChange}/ >
-                  <label type="text">Confirm Password</label>
-                  <input type="text" name="confirmpassword" onChange={this.handleInputChange}/ >
-              </div>
-              <button onClick={this.passHandle} type={this.state.action}>Signup</button><br></br><br></br>
-              <a style={{marginTop:20,marginBottom:20}}>Already a registered User?</a><br></br><br></br>
-              <NavLink to="/login"><button>Login</button></NavLink>
-          </form>
-
-        </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}
+      >
+        <form action="/signup" method="POST">
+          <TextField
+            style={{}}
+            name="username"
+            label="Username"
+            type="email"
+            onChange={this.handleInputChange}
+            margin="normal"
+          />
+          <br />
+          <TextField
+            name="email"
+            label="Email"
+            type="email"
+            onChange={this.handleInputChange}
+            margin="normal"
+          />
+          <br />
+          <TextField
+            name="password"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            margin="normal"
+            onChange={this.handleInputChange}
+          />
+          <br />
+          <TextField
+            name="confirmpassword"
+            label="Confirm Password"
+            type="password"
+            autoComplete="current-password"
+            margin="normal"
+            onChange={this.handleInputChange}
+          />
+          <br />
+          <br />
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.passHandle}
+            type={this.state.action}
+          >
+            Signup
+          </Button>
+        </form>
+      </div>
     );
   }
 }

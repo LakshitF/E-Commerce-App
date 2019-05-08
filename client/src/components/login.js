@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import '../css/main.css';
-let bg=require('../images/backlogin.jpg');
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 class Login extends Component {
   constructor(props)
@@ -12,27 +14,27 @@ class Login extends Component {
 
   render() {
     return (
-      <div style={{width: '100%',
-      height: '900px',
-      backgroundImage:"url("+bg+")",
-      backgroundSize: 'cover',display:'flex'}}>
-          <div style={{marginTop:50,alignSelf:'left',marginLeft:200,border:'1 px solid white',borderRadius:'3 px',backgroundImage:'none !important'}} >
-          <form className="product-form" action="/login" method="POST">
-              <div className="form-control">
-                  <label for="title">Email</label>
-                  <input type="text" name="email" id="email"/>
-                  <label for="password" type="text">Password</label>
-                  <input type="text" name="password"/>
-              </div>
-              <button type="submit">Login</button>
-          </form>
-          </div>
-
-          <form style={{marginTop:50,alignSelf:'right',marginRight:200}}  action="/forgot" method="POST">
-            <a  style={{ display:'inline-block',marginTop:20,marginBottom:20}}>Forgot your Password? No worries!</a> <br></br>
-            <label>Enter email </label>
-            <input type="text" name="email" id="email"/>
-            <button style={{marginLeft:20}} type="submit">Send Reset Link</button>
+      <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
+          <form action="/login" method="POST">
+                <TextField
+                style={{}}
+                name="email"
+                label="Email"
+                type="email"
+                margin="normal"
+                />
+                <br></br>
+                <TextField
+                name="password"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+                margin="normal"
+                />
+                <br></br><br></br>
+              <Button variant="contained" color="primary" type="submit">
+                Login
+              </Button>
           </form>
       </div>
     );
