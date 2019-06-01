@@ -5,6 +5,9 @@ import '../App.css';
 import axios from 'axios';
 import BrowserRouter from 'react-router-dom';
 import queryString from 'query-string';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Input from '@material-ui/core/Input';
 
 function Product(props) {
   return (
@@ -32,7 +35,12 @@ class Shop extends Component {
   {
     super(props);
     this.state={prods:[],currentPage:1,previousPage:0,hasPreviousPage:false,hasNextPage:false,lastPage:'',nextPage:2,sort:0};
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
+
+  handleInputChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   componentDidUpdate(){ //Always pay attention to what you read in the post! Read the full post. It was mentioned there to always check if this is the new url before calling set state. That will prevent the infinite loop.
     let flag=0;
@@ -112,7 +120,6 @@ class Shop extends Component {
       <div>
 
       <div style={{display:'flex',flexDirection:'column'}}>
-      <span class="sidebutton">Category</span>
       </div>
 
       <div style={{display:'flex',flexDirection:'column',marginLeft:250}}>
@@ -120,14 +127,32 @@ class Shop extends Component {
         <a style={{float:'left',padding:10,fontWeight:'bold'}}>Sort by Price:</a>
         <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=1`}>Low to High</NavLink></a>
         <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=-1`}>High to Low</NavLink></a>
+        <Select
+          onChange={this.handleInputChange}
+          input={<Input name="age" id="age-label-placeholder" />}
+          displayEmpty
+          name="Category"
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={"Shirts"}>Shirts</MenuItem>
+          <MenuItem value={"Pants"}>Pants</MenuItem>
+          <MenuItem value={"Winter wear"}>Winter wear</MenuItem>
+        </Select>
         </div>
         <div className="gridcontainer" style={{paddingTop:10}}>
           {items}
         </div>
-        <div className="pagination" style={{alignSelf:'center'}}>
-          <a ><NavLink to={`/shop/?page=${this.state.previousPage}&sort=${this.state.sort}`}>{this.state.previousPage}</NavLink></a>
+
+        <div className="pagination" style={{alignSelf:'center',position:'absolute',bottom:'15%'}}>
+          {this.state.previousPage!==0 &&
+            <a ><NavLink to={`/shop/?page=${this.state.previousPage}&sort=${this.state.sort}`}>{this.state.previousPage}</NavLink></a>
+          }
           <a><NavLink to={`/shop/?page=${this.state.currentPage}&sort=${this.state.sort}` }>{this.state.currentPage}</NavLink></a>
-          <a><NavLink to={`/shop/?page=${this.state.nextPage}&sort=${this.state.sort}` }>{this.state.nextPage}</NavLink></a>
+          {this.state.nextPage!==0 &&
+            <a ><NavLink to={`/shop/?page=${this.state.nextPage}&sort=${this.state.sort}`}>{this.state.previousPage}</NavLink></a>
+          }
         </div>
       </div>
 

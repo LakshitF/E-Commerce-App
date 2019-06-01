@@ -42,16 +42,23 @@ userSchema.methods.addToCart = function(product) {
       quantity: newQuantity
     });
   }
-
-  this.cart = {items:updatedCartItems};
+  console.log('Updated cart items');
+  this.cart={items:updatedCartItems};
+  console.log(this.cart);
   return this.save();
 };
 
 userSchema.methods.removeFromCart = function(productId) {
-  const updatedCartItems = this.cart.items.filter(item => {
-    return item.prodid.toString() !== productId.toString();  //filter takes this elem in the new array if inside condition is true
+  console.log('In remove cart function');
+  console.log(productId);
+
+  let updatedCartItems = this.cart.items.filter(item => {
+    console.log(item.prodid);
+    return item.prodid.toString() !== productId;  //filter takes this elem in the new array if inside condition is true
   });
   this.cart.items = updatedCartItems;
+  console.log(this.cart.items);
+  console.log("removed");
   return this.save();
 };
 

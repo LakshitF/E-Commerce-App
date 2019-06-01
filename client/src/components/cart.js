@@ -39,13 +39,14 @@ class Cart extends Component {
   componentDidMount(){
     axios.get('/cart')
     .then(( {data} )=>{ //this dereferencing is super important
-      if(data.loggedIn==false){
+      if(data.loggedIn===false){
         this.setState({alert:'<Alert variant=danger> You must be logged in to continue! </Alert>'});
       }
       else{
         this.setState({alert:''});
       }
-
+      console.log('returned cart data');
+      console.log(data.cart);
       this.setState({prods:data.cart});
     })
     .catch(err => {
@@ -65,7 +66,7 @@ class Cart extends Component {
     console.log(this.state.total);
   }
   render()
-  {
+  { //becuse of populate you can access from prodid
     let items;
     items='';
     let alert=<Alert variant='danger'> You must be logged in to continue! </Alert>;
@@ -77,7 +78,7 @@ class Cart extends Component {
           img={product.prodid.img}
           title={product.prodid.title}
           description={product.prodid.description}
-          _id={product._id}
+          _id={product.prodid._id}
           qty={product.quantity}
           />
         );
@@ -90,7 +91,7 @@ class Cart extends Component {
       <div className="gridcontainer" style={{paddingTop:10}}>
         {items}
       </div>
-      <button onClick={this.getsum} style={{alignSelf:'center'}}>Get Cart total</button>
+      <button onClick={this.getsum} style={{alignSelf:'center',position:'absolute',bottom:'10%'}}>Get Cart total</button>
       <a style={{alignSelf:'center',position: 'absolute',bottom:0}}>Cart total {this.state.total}</a>
       </div>
     );
