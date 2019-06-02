@@ -69,7 +69,7 @@ router.post("/add-product", ensureAuth, (req, res, next) => {
     .catch(err => {
       console.log(err);
     });
-  res.redirect("/add-product");
+  return next();
 });
 
 router.get("/cart", ensureAuth, (req, res, next) => {

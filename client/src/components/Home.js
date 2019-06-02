@@ -11,7 +11,7 @@ class Home extends Component {
 
   componentDidMount()
   {
-    let images = ["../images/bg-01.jpg","../images/ko.jpg"];
+    let images = ["/images/backlogin.jpg","/images/k1.jpg"];
     let i = 0;
     let l=images.length;
     let doc=document.getElementById("back");

@@ -5,24 +5,31 @@ import '../App.css';
 import axios from 'axios';
 import BrowserRouter from 'react-router-dom';
 import queryString from 'query-string';
-import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
+import {Alert} from 'react-bootstrap';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
 function Product(props) {
   return (
-    <div className="griditem">
-    <div>
-        <img src={props.img} width={140} height={210}/>
+    <div className="griditem" style={{width:160,height:340,justifyContent:'center',display:'flex',flexDirection:'column'}}>
+    <div style={{alignSelf:'center'}}>
+        <img src={props.img} width={140} height={210} style={{alignSelf:'center'}}/>
     </div>
   <div style={{textAlign:'center'}}>
       <span style={{display:'inline-block',fontSize:20,color:'blue'}}>{props.title}</span>
       <br></br>
       <span style={{fontSize:22,display:'inline-block'}}>${props.price}</span>
   </div>
-  <div className="card__actions" style={{marginBottom:'5px'}}>
-    <form action="/addToCart" method="post">
-      <button className="btn" type="submit">Add to Cart</button>
+  <div style={{marginBottom:'10px',marginTop:'10px',alignItems:'center',alignSelf:'center'}}>
+    <form action="/addToCart" method="post" target="hiddenFrame" >
+    <Button variant="contained" color="primary" type="submit">
+      Add to Cart
+    </Button>
       <input type="hidden" name="productId" value={props._id} />
     </form>
   </div>
@@ -34,7 +41,7 @@ class Shop extends Component {
   constructor(props)
   {
     super(props);
-    this.state={prods:[],currentPage:1,previousPage:0,hasPreviousPage:false,hasNextPage:false,lastPage:'',nextPage:2,sort:0};
+    this.state={loading:false,prods:[],currentPage:1,previousPage:0,hasPreviousPage:false,hasNextPage:false,lastPage:'',nextPage:2,sort:0};
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -82,6 +89,7 @@ class Shop extends Component {
       console.log('error1');
       console.log(err);
       });
+
   }
 
   componentDidMount(){
@@ -92,13 +100,15 @@ class Shop extends Component {
       handle=1;
     axios.get(`/shop/?page=${handle}&sort=${sort}`)  //request
     .then(({data})=>{
-      console.log(data.prods);
-      this.setState({prods:data.prods,currentPage:data.currentPage,previousPage:data.previousPage,nextPage:data.nextPage,hasPreviousPage:data.hasPreviousPage,hasNextPage:data.hasNextPage,lastPage:data.lastPage,sort:0});
+      console.log('LOADED');
+      this.setState({loading:false,prods:data.prods,currentPage:data.currentPage,previousPage:data.previousPage,nextPage:data.nextPage,hasPreviousPage:data.hasPreviousPage,hasNextPage:data.hasNextPage,lastPage:data.lastPage,sort:0});
     })
     .catch(err => {
       console.log('error1');
       console.log(err);
       });
+      this.setState({loading:true});
+      console.log('loading');
   }
 
 
@@ -117,45 +127,54 @@ class Shop extends Component {
     });
 
     return (
-      <div>
+      <div style={{width:1300,height:800}}>
 
-      <div style={{display:'flex',flexDirection:'column'}}>
-      </div>
-
-      <div style={{display:'flex',flexDirection:'column',marginLeft:250}}>
-        <div style={{display:'flex',flexDirection:'row'}}>
-        <a style={{float:'left',padding:10,fontWeight:'bold'}}>Sort by Price:</a>
-        <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=1`}>Low to High</NavLink></a>
-        <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=-1`}>High to Low</NavLink></a>
-        <Select
-          onChange={this.handleInputChange}
-          input={<Input name="age" id="age-label-placeholder" />}
-          displayEmpty
-          name="Category"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={"Shirts"}>Shirts</MenuItem>
-          <MenuItem value={"Pants"}>Pants</MenuItem>
-          <MenuItem value={"Winter wear"}>Winter wear</MenuItem>
-        </Select>
+      {this.state.loading===true
+        &&
+        <div>
+        <img src="/images/glow.gif" style={{position:'absolute',width:'70%',height:'70%',alignSelf:'center'}}/>
         </div>
-        <div className="gridcontainer" style={{paddingTop:10}}>
-          {items}
-        </div>
+      }
+      {
+        this.state.loading===false
+        &&
+        <div style={{display:'flex',flexDirection:'column',marginLeft:250}}>
+          <div style={{display:'flex',flexDirection:'row'}}>
+          <a style={{float:'left',padding:10,fontWeight:'bold'}}>Sort by Price:</a>
+          <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=1`}>Low to High</NavLink></a>
+          <a style={{float:'left',padding:10}}><NavLink style={{textDecoration:'none'}} to={`/shop/?page=1&sort=-1`}>High to Low</NavLink></a>
 
-        <div className="pagination" style={{alignSelf:'center',position:'absolute',bottom:'15%'}}>
-          {this.state.previousPage!==0 &&
-            <a ><NavLink to={`/shop/?page=${this.state.previousPage}&sort=${this.state.sort}`}>{this.state.previousPage}</NavLink></a>
-          }
-          <a><NavLink to={`/shop/?page=${this.state.currentPage}&sort=${this.state.sort}` }>{this.state.currentPage}</NavLink></a>
-          {this.state.nextPage!==0 &&
-            <a ><NavLink to={`/shop/?page=${this.state.nextPage}&sort=${this.state.sort}`}>{this.state.previousPage}</NavLink></a>
-          }
-        </div>
-      </div>
+          <Select
+            onChange={this.handleInputChange}
+            name="Category"
+            value="afaafad"
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value="Headphones" name="Headphones">Headphones</MenuItem>
+            <MenuItem value="Laptops" name="Laptops">Laptops</MenuItem>
+            <MenuItem value="Mobile Phones" name="Mobile Phones">Mobile Phones</MenuItem>
+          </Select>
 
+          </div>
+          <div className="gridcontainer" style={{paddingTop:10}}>
+            {items}
+          </div>
+
+          <div className="pagination" style={{alignSelf:'center',position:'absolute',bottom:'15%'}}>
+            {this.state.previousPage!==0 &&
+              <a ><NavLink to={`/shop/?page=${this.state.previousPage}&sort=${this.state.sort}`}>{this.state.previousPage}</NavLink></a>
+            }
+            <a><NavLink to={`/shop/?page=${this.state.currentPage}&sort=${this.state.sort}` }>{this.state.currentPage}</NavLink></a>
+            {this.state.nextPage!==0 &&
+              <a ><NavLink to={`/shop/?page=${this.state.nextPage}&sort=${this.state.sort}`}>{this.state.nextPage}</NavLink></a>
+            }
+          </div>
+        </div>
+      }
+
+      <iframe name="hiddenFrame" width="0" height="0" border="0" style={{display:'none'}}></iframe>
       </div>
     );
   }

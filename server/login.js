@@ -27,7 +27,7 @@ router.post("/forgot", (req, res, next) => {
       .then(user => {
         if (!user) {
           console.log("User does not exist");
-          return res.redirect("/login");
+          return res.redirect("/login");//
         }
         user.resetToken = token;
         user.tokenExpiration = Date.now() + 6000000;

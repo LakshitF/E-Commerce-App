@@ -3,24 +3,28 @@ import {NavLink} from 'react-router-dom';
 import '../css/main.css';
 import '../App.css';
 import axios from 'axios';
-import {Alert} from 'react-bootstrap';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 function Product(props) {
   return (
-    <div className="griditem">
-    <div>
-        <img src={props.img} width={190} height={250}/>
+    <div className="griditem" style={{width:220,height:430,display:'flex',flexDirection:'column'}}>
+    <div style={{alignSelf:'center'}}>
+        <img src={props.img} width={190} height={250} style={{alignSelf:'center'}}/>
     </div>
   <div style={{textAlign:'center'}}>
-      <span style={{display:'inline-block',fontSize:22}}>{props.title}</span>
+      <span style={{display:'inline-block',fontSize:20,color:'blue'}}>{props.title}</span>
       <br></br>
   </div>
   <span style={{marginBottom:'10px',fontSize:18}}>Quantity: {props.qty}</span>
   <br></br>
-  <span style={{fontSize:20}}>Price: ${props.price}</span>
-  <div className="card__actions">
-    <form action="/remove" method="post">
-      <button className="btn" type="submit">Remove from Cart</button>
+  <span style={{fontSize:20,marginTop:'20px'}}>Price: ${props.price}</span>
+  <div style={{marginBottom:'10px',marginTop:'10px',alignSelf:'center'}}>
+    <form action="/remove" method="post" style={{alignSelf:'center'}}>
+    <Button variant="contained" color="primary" type="submit">
+      Remove from Cart
+    </Button>
       <input type="hidden" name="productId" value={props._id} />
     </form>
   </div>
@@ -40,7 +44,8 @@ class Cart extends Component {
     axios.get('/cart')
     .then(( {data} )=>{ //this dereferencing is super important
       if(data.loggedIn===false){
-        this.setState({alert:'<Alert variant=danger> You must be logged in to continue! </Alert>'});
+
+        this.setState({alert:'<span> You must be logged in to continue! </span>'});
       }
       else{
         this.setState({alert:''});
@@ -50,11 +55,13 @@ class Cart extends Component {
       this.setState({prods:data.cart});
     })
     .catch(err => {
-      console.log(err);
+      console.log('Not Logged In');
+      this.setState({alert:<span style={{fontSize:24,alignSelf:'center'}}> You must be logged in to continue! </span>});
       });
   }
 
   getsum(){
+  
     let l=this.state.prods.length;
     let total=0;
     for(let i=0;i<l;i++)
@@ -69,7 +76,6 @@ class Cart extends Component {
   { //becuse of populate you can access from prodid
     let items;
     items='';
-    let alert=<Alert variant='danger'> You must be logged in to continue! </Alert>;
     if (typeof this.state.prods!=='undefined'){
       items = this.state.prods.map((product,index)=>{
         return (
@@ -86,13 +92,16 @@ class Cart extends Component {
     }
 
     return (
-      <div style={{display:'flex',flexDirection:'column'}}>
-      {alert}
+      <div style={{display:'flex',flexDirection:'column',width:1366,height:580,justifyContent:'center'}}>
+      {this.state.alert}
       <div className="gridcontainer" style={{paddingTop:10}}>
         {items}
       </div>
-      <button onClick={this.getsum} style={{alignSelf:'center',position:'absolute',bottom:'10%'}}>Get Cart total</button>
+      <Button variant="contained" color="primary" onClick={this.getsum} style={{position:'absolute !important',width:200,alignSelf:'center'}}>
+        Get Cart Total
+      </Button>
       <a style={{alignSelf:'center',position: 'absolute',bottom:0}}>Cart total {this.state.total}</a>
+
       </div>
     );
   }

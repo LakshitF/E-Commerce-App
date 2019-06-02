@@ -23,6 +23,12 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Navbar />
+          <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+          />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/add-product" component={AddProduct} />
@@ -31,7 +37,7 @@ class App extends Component {
           <Route exact path="/reset" component={Reset} />
           <Route exact path="/resetPass/:token" component={ResetPass} />
 
-          <Route exact path="/home" component={Home} />
+          <Route exact path="/" component={Home} />
         </div>
       </BrowserRouter>
     );
