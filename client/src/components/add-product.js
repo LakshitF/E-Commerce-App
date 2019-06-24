@@ -14,28 +14,35 @@ class AddProduct extends Component {
                 style={{}}
                 name="title"
                 label="Title"
-                type="email"
+                type="title"
                 margin="normal"
                 />
                 <br></br>
                 <TextField
                 name="price"
                 label="Price"
-                type="email"
+                type="title"
                 margin="normal"
                 />
                 <br></br>
                 <TextField
                 name="description"
                 label="Description"
-                type="email"
+                type="title"
                 margin="normal"
                 />
                 <br></br>
                 <TextField
                 name="img"
                 label="Image Url"
-                type="email"
+                type="title"
+                margin="normal"
+                />
+                <br></br>
+                <TextField
+                name="category"
+                label="Category"
+                type="title"
                 margin="normal"
                 />
                 <br></br><br></br>

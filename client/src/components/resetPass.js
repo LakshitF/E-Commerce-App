@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import '../css/main.css';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 class ResetPass extends Component {
   constructor(props)
@@ -18,16 +21,30 @@ class ResetPass extends Component {
 
   render() {
     return (
-          <form className="product-form" action="/newPassword/" method="POST">
-              <div className="form-control">
-                  <label >Enter email again</label>
-                  <input type="text" name="email"/>
-                  <label >New Password</label>
-                  <input type="text" name="password" id="password"/>
-                  <input type="hidden" name="token" id="token" value={this.state.token}/> //set the value in the value tag lol!
-              </div>
-              <button type="submit">Update Password</button>
-          </form>
+          <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
+              <form action="/newPassword" method="POST">
+                    <TextField
+                    style={{}}
+                    name="email"
+                    label="Email"
+                    type="email"
+                    margin="normal"
+                    />
+                    <br></br>
+                    <TextField
+                    style={{}}
+                    name="password"
+                    label="Password"
+                    type="password"
+                    margin="normal"
+                    />
+                    <br></br>
+                  <Button variant="contained" color="primary" type="submit">
+                    Update Password
+                  </Button>
+                  <input type="hidden" name="token" id="token" value={this.state.token}/>
+              </form>
+          </div>
     );
   }
 }

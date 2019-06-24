@@ -1,19 +1,25 @@
 .gridcontainer {
-display: inline-grid;
-grid-template-columns:17.5% 17.5% 17.5% 17.5%;
-background-color: #ffffff;
-padding: 10px;
+  display: inline-grid;
+  grid-template-columns: 22% 22% 22% 22%;
+  background-color: #ffffff;
+  padding: 10px;
+  grid-row-gap: 40px;
+}
+
+.imgitem {
+  width: 100%;
+  height: 100%;
 }
 
 .griditem {
-box-shadow: 3px 3px 2px grey;
-background-color: rgba(255, 255, 255, 0.8);
-border: 0.2px solid rgba(255, 255, 255, 1);
-font-size: 20px;
-margin-top:10px;
-margin-left: 40px;
-align-content: center;
-align-items:center;
+  box-shadow: 3px 3px 2px grey;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 0.2px solid rgba(255, 255, 255, 1);
+  font-size: 20px;
+  margin-top: 10px;
+  margin-right: 20px;
+  align-content: center;
+  align-items: center;
 }
 
 .griditem:hover {
@@ -22,7 +28,7 @@ align-items:center;
   border-color: black;
 }
 
-.griditem2{
+.griditem2 {
   box-shadow: 1px 1px 1px grey;
 }
 .griditem2:hover {
@@ -31,10 +37,9 @@ align-items:center;
   border-color: grey;
 }
 
-
 .pagination {
   display: flex;
-  float:bottom;
+  float: bottom;
 }
 
 .pagination a {
@@ -45,12 +50,14 @@ align-items:center;
 }
 
 .pagination a.active {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
 
-.misc{
-	display:flex;
+.misc {
+  display: flex;
 }

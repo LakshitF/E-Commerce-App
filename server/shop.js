@@ -25,14 +25,32 @@ router.get("/shop", (req, res, next) => {
   //react me bhi handle pass hua
   const page = +req.query.page || 1; //?page=1,,if req.query.handle--> gets
   const k = +req.query.sort || 0;
+  let category;
+  if(req.query.category)
+    category=req.query.category;
+  else {
+    category="";
+  }
   Product.find()
     .countDocuments()
     .then(numProducts => {
       totalItems = numProducts;
-      return Product.find()
-        .sort({ price: k })
-        .skip((page - 1) * items_per_page) //skip previous items
-        .limit(items_per_page); //go till another page only
+      if(category==="")
+      {
+        console.log('all prods');
+        return Product.find()
+          .sort({ price: k })
+          .skip((page - 1) * items_per_page) //skip previous items
+          .limit(items_per_page); //go till another page only
+      }
+      else{
+        console.log('the');
+        return Product.find({category:category})
+          .sort({ price: k })
+          .skip((page - 1) * items_per_page) //skip previous items
+          .limit(items_per_page); //go till another page only
+      }
+
     })
     .then(products => {
       res.send({
@@ -52,6 +70,7 @@ router.get("/shop", (req, res, next) => {
     });
 });
 
+
 //name in html file of input was title
 router.post("/add-product", ensureAuth, (req, res, next) => {
   //../ means go up one level
@@ -59,7 +78,8 @@ router.post("/add-product", ensureAuth, (req, res, next) => {
     title: req.body.title,
     price: req.body.price,
     description: req.body.description,
-    img: req.body.img
+    img: req.body.img,
+    category:req.body.category
   });
   product
     .save()

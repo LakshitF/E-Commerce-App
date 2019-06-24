@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-        "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"
+        "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"
     }
   })
 );
@@ -31,6 +31,12 @@ router.post("/forgot", (req, res, next) => {
         }
         user.resetToken = token;
         user.tokenExpiration = Date.now() + 6000000;
+        user.save().then((a)=>{
+          console.log('details updated');
+        }).catch((err)=>{
+          console.log('not update');
+          console.log(err);
+        });
         console.log("Mail Sending.");
 
         transporter
@@ -72,6 +78,10 @@ router.post("/newPassword", async (req, res, next) => {
     email: email
   })
     .then(user => {
+      if(user===null)
+        {
+          throw new Error('User not found');
+        }
       resetUser = user;
       console.log("user with this token found ", user);
       return bcrypt.hash(newPassword, 12);
@@ -80,7 +90,9 @@ router.post("/newPassword", async (req, res, next) => {
       resetUser.password = hashedPassword;
       resetUser.resetToken = undefined;
       resetUser.resetTokenExpiration = undefined;
-      return resetUser.save();
+      console.log('done');
+      resetUser.save();
+      res.redirect('/login');
     })
     .catch(err => {
       console.log("Invalid token");
@@ -124,6 +136,7 @@ router.post("/signout", (req, res, next) => {
   console.log(req.session.isLoggedIn);
   res.send({ log: false });
   req.session = null;
+  res.redirect('/shop');
 });
 
 router.post("/signup", (req, res, next) => {

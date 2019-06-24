@@ -16,13 +16,16 @@ const userSchema = new Schema({
     required: true
   },
   cart:{
-    items:[
-      {
-      prodid: {type:Schema.Types.ObjectId,ref:'Product',required:true},
-      quantity: {type:Number,required:true}
-    }
-  ]
-  }
+      items:[
+        {
+        prodid: {type:Schema.Types.ObjectId,ref:'Product',required:true},
+        quantity: {type:Number,required:true}
+      }
+    ]
+  },
+resetToken:{
+  type:String
+}
 },{collection:'users'});
 //defining methods of this schema as we did to that of a class
 userSchema.methods.addToCart = function(product) {
