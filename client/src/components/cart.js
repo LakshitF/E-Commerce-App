@@ -12,35 +12,31 @@ function Product(props) {
     <div
       className="griditem"
       style={{
-        width: 220,
-        height: 430,
+        justifyContent: "center",
         display: "flex",
         flexDirection: "column"
       }}
     >
-      <div style={{ alignSelf: "center" }}>
-        <img
-          src={props.img}
-          width={190}
-          height={250}
-          style={{ alignSelf: "center" }}
-        />
-      </div>
+      <img class="imgitem" src={props.img} style={{ alignSelf: "center" }} />
       <div style={{ textAlign: "center" }}>
         <span style={{ display: "inline-block", fontSize: 20, color: "blue" }}>
           {props.title}
         </span>
         <br />
+        <span style={{ fontSize: 22, display: "inline-block" }}>
+          ${props.price}
+        </span>
+        <span style={{ fontSize: 14, display: "inline-block" }}>
+          ${props.quantity}
+        </span>
       </div>
-      <span style={{ marginBottom: "10px", fontSize: 18 }}>
-        Quantity: {props.qty}
-      </span>
-      <br />
-      <span style={{ fontSize: 20, marginTop: "20px" }}>
-        Price: ${props.price}
-      </span>
       <div
-        style={{ marginBottom: "10px", marginTop: "10px", alignSelf: "center" }}
+        style={{
+          marginBottom: "10px",
+          marginTop: "10px",
+          alignItems: "center",
+          alignSelf: "center"
+        }}
       >
         <form action="/remove" method="post" style={{ alignSelf: "center" }}>
           <Button variant="contained" color="primary" type="submit">
@@ -143,9 +139,9 @@ class Cart extends Component {
             alignSelf: "center"
           }}
         >
-          Get Cart Total
+          Checkout
         </Button>
-        <a style={{ alignSelf: "center", position: "absolute", bottom: 0 }}>
+        <a style={{ alignSelf: "center", position: "absolute", bottom: 100 }}>
           Cart total {this.state.total}
         </a>
       </div>

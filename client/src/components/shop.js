@@ -89,20 +89,21 @@ class Shop extends Component {
     console.log("did update");
     if (typeof sort === "undefined") sort = 1;
     if (typeof handle === "undefined") handle = 1;
+    if (typeof category === "undefined") category = "all";
 
-    if (sort !== this.state.sort) {
+    if (
+      sort !== this.state.sort ||
+      handle !== this.state.currentPage ||
+      category !== this.state.category
+    ) {
       flag = 1;
     }
-    if (handle !== this.state.currentPage) {
-      flag = 1;
-    }
-
     if (flag === 0) {
       return;
     }
     //yeah
     axios
-      .get(`/shop/?page=${handle}&sort=${sort}`) //request
+      .get(`/shop/?page=${handle}&sort=${sort}&category=${category}`) //request
       .then(({ data }) => {
         console.log("arrived");
         if (data.hasNextPage === false) {
@@ -116,7 +117,8 @@ class Shop extends Component {
           hasPreviousPage: data.hasPreviousPage,
           hasNextPage: data.hasNextPage,
           lastPage: data.lastPage,
-          sort: sort
+          sort: sort,
+          category: category
         });
       })
       .catch(err => {
@@ -189,17 +191,23 @@ class Shop extends Component {
             width: 200
           }}
         >
-          <DropdownButton id="drop1" title={this.state.category}>
-            <Dropdown.Item href="/shop/?category=laptops">
+          <h3>Category</h3>
+          <span style={{ fontSize: "20" }}>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to={`/shop/?category="Laptops"`}
+            >
               Laptops
-            </Dropdown.Item>
-            <Dropdown.Item href="/shop/?category=mobiles">
-              Mobile Phones
-            </Dropdown.Item>
-            <Dropdown.Item href="/shop/?category=headphones">
-              Headphones
-            </Dropdown.Item>
-          </DropdownButton>
+            </NavLink>
+          </span>
+          <span style={{ fontSize: "20" }}>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to={`/shop/?category="Headphones"`}
+            >
+              Mobiles
+            </NavLink>
+          </span>
         </div>
         {this.state.loading === true && (
           <div

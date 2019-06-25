@@ -46,7 +46,11 @@ class Register extends Component {
           alignItems: "center"
         }}
       >
-        <form action="/signup" method="POST">
+        <form
+          action="/signup"
+          method="POST"
+          style={{ left: "auto", right: "auto", top: "auto", bottom: "auto" }}
+        >
           <TextField
             style={{}}
             name="username"

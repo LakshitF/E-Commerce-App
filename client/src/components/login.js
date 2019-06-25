@@ -42,9 +42,9 @@ class Login extends Component {
           </Button>
           <br />
           <br />
-          <Button variant="contained" color="primary">
-            <NavLink to="/reset">Forgot password? </NavLink>
-          </Button>
+          <NavLink to="/reset" style={{ textColor: "white" }}>
+            Forgot password?{" "}
+          </NavLink>
         </form>
       </div>
     );

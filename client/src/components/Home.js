@@ -12,6 +12,18 @@ class Home extends Component {
     let images = ["/images/backlogin.jpg", "/images/k1.jpg"];
     let i = 0;
     let l = images.length;
+    let doc = document.getElementById("back");
+    setInterval(function() {
+      if (l == i) {
+        i = 0;
+        doc.src = images[i];
+        i++;
+      } else {
+        doc.src = images[i];
+        i++;
+        console.log("image changed");
+      }
+    }, 3000);
   }
 
   render() {
@@ -51,8 +63,14 @@ class Home extends Component {
               marginRight: "40px"
             }}
           >
-            <img src="../images/cat1.jpg" width={85} height={140} />
-            <span style={{ fontSize: 14, color: "blue", alignSelf: "center" }}>
+            <img src="../images/cat1.jpg" width={95} height={180} />
+            <span
+              style={{
+                display: "inline-block",
+                fontSize: 18,
+                color: "blue"
+              }}
+            >
               Laptops
             </span>
           </div>
@@ -64,8 +82,15 @@ class Home extends Component {
               marginRight: "40px"
             }}
           >
-            <img src="../images/cat2.jpg" width={85} height={140} />
-            <span style={{ fontSize: 14, color: "blue", alignSelf: "center" }}>
+            <img src="../images/cat2.jpg" width={110} height={180} />
+            <span
+              style={{
+                display: "inline-block",
+                fontSize: 18,
+                color: "blue",
+                bottom: "1"
+              }}
+            >
               Headphones
             </span>
           </div>
@@ -77,8 +102,15 @@ class Home extends Component {
               marginRight: "40px"
             }}
           >
-            <img src="../images/cat3.jpg" width={85} height={140} />
-            <span style={{ fontSize: 14, color: "blue", alignSelf: "center" }}>
+            <img src="../images/cat3.jpg" width={110} height={180} />
+            <span
+              style={{
+                display: "inline-block",
+                fontSize: 18,
+                color: "blue",
+                bottom: "1"
+              }}
+            >
               Mobiles
             </span>
           </div>

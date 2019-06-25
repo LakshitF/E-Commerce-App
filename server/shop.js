@@ -9,7 +9,7 @@ function ensureAuth(req, res, next) {
     return next();
   } else {
     console.log("You must be logged in to do this!");
-    res.redirect('/add-product');
+    res.redirect("/add-product");
   }
 } //Similarly can add admin validation. All such validation should be done from the server side or the user can easily change such local variables
 
@@ -26,31 +26,28 @@ router.get("/shop", (req, res, next) => {
   const page = +req.query.page || 1; //?page=1,,if req.query.handle--> gets
   const k = +req.query.sort || 0;
   let category;
-  if(req.query.category)
-    category=req.query.category;
+  if (req.query.category !== "undefined") category = req.query.category;
   else {
-    category="";
+    category = "all";
   }
+  console.log(category);
   Product.find()
     .countDocuments()
     .then(numProducts => {
       totalItems = numProducts;
-      if(category==="")
-      {
-        console.log('all prods');
+      if (category === "all") {
+        console.log("all prods");
         return Product.find()
           .sort({ price: k })
           .skip((page - 1) * items_per_page) //skip previous items
           .limit(items_per_page); //go till another page only
-      }
-      else{
-        console.log('the');
-        return Product.find({category:category})
+      } else {
+        console.log("selected prods");
+        return Product.find({ category: category })
           .sort({ price: k })
           .skip((page - 1) * items_per_page) //skip previous items
           .limit(items_per_page); //go till another page only
       }
-
     })
     .then(products => {
       res.send({
@@ -70,7 +67,6 @@ router.get("/shop", (req, res, next) => {
     });
 });
 
-
 //name in html file of input was title
 router.post("/add-product", ensureAuth, (req, res, next) => {
   //../ means go up one level
@@ -79,7 +75,7 @@ router.post("/add-product", ensureAuth, (req, res, next) => {
     price: req.body.price,
     description: req.body.description,
     img: req.body.img,
-    category:req.body.category
+    category: req.body.category
   });
   product
     .save()
@@ -99,7 +95,7 @@ router.get("/cart", ensureAuth, (req, res, next) => {
     return next();
   }
 
-  req.user  //this is making reference !! Super Important
+  req.user //this is making reference !! Super Important
     .populate("cart.items.prodid")
     .execPopulate()
     .then(user => {
@@ -125,12 +121,12 @@ router.post("/addToCart", ensureAuth, (req, res, next) => {
 
 router.post("/remove", ensureAuth, (req, res, next) => {
   let id = req.body.productId;
-  let id2=id.toString();
-  console.log("id2 is ",id2);
+  let id2 = id.toString();
+  console.log("id2 is ", id2);
   req.user
     .removeFromCart(id2)
     .then(result => {
-            res.redirect("/cart");
+      res.redirect("/cart");
     })
     .catch(err => {
       console.log("yahan error");

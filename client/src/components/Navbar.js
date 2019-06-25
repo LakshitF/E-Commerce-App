@@ -39,14 +39,14 @@ class Navbar extends Component {
     let label2;
     if (this.state.log) {
       label = (
-        <NavLink to="/signout" replace>
-          <span
-            className="main-header__item"
-            style={{ alignSelf: "right", marginLeft: 900 }}
-          >
+        <span
+          className="main-header__item"
+          style={{ alignSelf: "right", marginLeft: 900 }}
+        >
+          <NavLink to="/" replace>
             <button onClick={this.handleSignout}> Sign Out </button>
-          </span>
-        </NavLink>
+          </NavLink>
+        </span>
       );
     } else {
       label = (
