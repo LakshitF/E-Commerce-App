@@ -22,7 +22,7 @@ class ResetPass extends Component {
   render() {
     return (
           <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
-              <form action="/newPassword" method="POST">
+              <form action="/api/newPassword" method="POST">
                     <TextField
                     style={{}}
                     name="email"

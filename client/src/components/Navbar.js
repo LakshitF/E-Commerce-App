@@ -11,7 +11,7 @@ class Navbar extends Component {
 
   handleSignout() {
     axios
-      .post("/signout")
+      .post("/api/signout")
       .then(data => {
         //this dereferencing is super important
         this.setState({ log: data.log });
@@ -24,7 +24,7 @@ class Navbar extends Component {
 
   componentDidMount() {
     axios
-      .get("/login")
+      .get("/api/login")
       .then(data => {
         //this dereferencing is super important
         this.setState({ log: data.data.log });

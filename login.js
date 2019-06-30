@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport(
   })
 );
 
-router.post("/forgot", (req, res, next) => {
+router.post("/api/forgot", (req, res, next) => {
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
       console.log(err);
@@ -64,7 +64,7 @@ router.post("/forgot", (req, res, next) => {
   });
 });
 
-router.post("/newPassword", async (req, res, next) => {
+router.post("/api/newPassword", async (req, res, next) => {
   const passToken = req.body.token;
   let user = await User.findOne({ resetToken: passToken });
   const newPassword = req.body.password;
@@ -100,7 +100,7 @@ router.post("/newPassword", async (req, res, next) => {
     });
 });
 
-router.post("/login", (req, res, next) => {
+router.post("/api/login", (req, res, next) => {
   const pass = req.body.password;
   const email = req.body.email;
   console.log(email);
@@ -128,18 +128,18 @@ router.post("/login", (req, res, next) => {
     .catch(err => console.log(err));
 });
 
-router.get("/login", (req, res, next) => {
+router.get("/api/login", (req, res, next) => {
   res.send({ log: req.session.isLoggedIn });
 });
 
-router.post("/signout", (req, res, next) => {
+router.post("/api/signout", (req, res, next) => {
   console.log(req.session.isLoggedIn);
   res.send({ log: false });
   req.session = null;
   res.redirect('/shop');
 });
 
-router.post("/signup", (req, res, next) => {
+router.post("/api/signup", (req, res, next) => {
   //../ means go up one level
   //always remember, this must be an object, look at your schema
   User.findOne({ email: req.body.email })

@@ -9,7 +9,7 @@ class AddProduct extends Component {
   render() {
     return (
       <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
-          <form action="/add-product" method="POST">
+          <form action="/api/add-product" method="POST">
                 <TextField
                 style={{}}
                 name="title"

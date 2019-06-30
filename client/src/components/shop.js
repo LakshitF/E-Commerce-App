@@ -103,7 +103,7 @@ class Shop extends Component {
     }
     //yeah
     axios
-      .get(`/shop/?page=${handle}&sort=${sort}&category=${category}`) //request
+      .get(`/api/shop/?page=${handle}&sort=${sort}&category=${category}`) //request
       .then(({ data }) => {
         console.log("arrived");
         if (data.hasNextPage === false) {
@@ -135,7 +135,7 @@ class Shop extends Component {
 
     if (typeof handle == "undefined") handle = 1;
     axios
-      .get(`/shop/?page=${handle}&sort=${sort}&category=${category}`) //request
+      .get(`/api/shop/?page=${handle}&sort=${sort}&category=${category}`) //request
       .then(({ data }) => {
         console.log("LOADED");
         this.setState({

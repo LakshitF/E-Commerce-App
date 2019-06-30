@@ -58,7 +58,7 @@ class Cart extends Component {
 
   componentDidMount() {
     axios
-      .get("/cart")
+      .get("/api/cart")
       .then(({ data }) => {
         //this dereferencing is super important
         if (data.loggedIn === false) {

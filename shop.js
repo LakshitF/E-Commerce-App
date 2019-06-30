@@ -21,15 +21,15 @@ function ensureAdmin(req, res, next) {
   }
 }
 
-router.get("/shop", (req, res, next) => {
+router.get("/api/shop", (req, res, next) => {
   //react me bhi handle pass hua
   const page = +req.query.page || 1; //?page=1,,if req.query.handle--> gets
   const k = +req.query.sort || 0;
-  let category;
-  if (req.query.category !== "undefined") category = req.query.category;
-  else {
-    category = "all";
-  }
+  let category="all";
+  // if (req.query.category !== "undefined") category = req.query.category;
+  // else {
+  //   category = "all";
+  // }
   console.log(category);
   Product.find()
     .countDocuments()
@@ -68,7 +68,7 @@ router.get("/shop", (req, res, next) => {
 });
 
 //name in html file of input was title
-router.post("/add-product", ensureAuth, (req, res, next) => {
+router.post("/api/add-product", ensureAuth, (req, res, next) => {
   //../ means go up one level
   const product = new Product({
     title: req.body.title,
@@ -88,7 +88,7 @@ router.post("/add-product", ensureAuth, (req, res, next) => {
   return next();
 });
 
-router.get("/cart", ensureAuth, (req, res, next) => {
+router.get("/api/cart", ensureAuth, (req, res, next) => {
   if (typeof req.user === "undefined") {
     res.send({ loggedIn: false });
     console.log("not logged in");
@@ -105,7 +105,7 @@ router.get("/cart", ensureAuth, (req, res, next) => {
     .catch(err => console.log(err));
 });
 
-router.post("/addToCart", ensureAuth, (req, res, next) => {
+router.post("/api/addToCart", ensureAuth, (req, res, next) => {
   let id = req.body.productId;
 
   Product.findById(id) //static methods are acessed using classname
@@ -119,7 +119,7 @@ router.post("/addToCart", ensureAuth, (req, res, next) => {
   res.redirect("/shop");
 });
 
-router.post("/remove", ensureAuth, (req, res, next) => {
+router.post("/api/remove", ensureAuth, (req, res, next) => {
   let id = req.body.productId;
   let id2 = id.toString();
   console.log("id2 is ", id2);

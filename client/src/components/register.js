@@ -47,7 +47,7 @@ class Register extends Component {
         }}
       >
         <form
-          action="/signup"
+          action="/api/signup"
           method="POST"
           style={{ left: "auto", right: "auto", top: "auto", bottom: "auto" }}
         >

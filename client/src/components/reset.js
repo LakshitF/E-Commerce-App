@@ -8,7 +8,7 @@ class Reset extends Component {
   render() {
     return (
       <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
-          <form action="/forgot" method="POST">
+          <form action="/api/forgot" method="POST">
                 <TextField
                 style={{}}
                 name="email"

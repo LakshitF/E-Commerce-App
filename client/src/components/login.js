@@ -19,7 +19,7 @@ class Login extends Component {
           alignItems: "center"
         }}
       >
-        <form action="/login" method="POST">
+        <form action="/api/login" method="POST">
           <TextField
             style={{}}
             name="email"
