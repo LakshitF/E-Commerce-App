@@ -10,7 +10,8 @@
     "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "engines": {
-    "yarn": "1.16.0"
+    "yarn": "1.16.0",
+    "node": "10.16"
   },
   "nodemonConfig": {
     "ignore": [
