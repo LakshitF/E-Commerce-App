@@ -5,9 +5,14 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "client": "cd.. && cd client && yarn start",
-    "server": "nodemon app.js",
+    "client": "cd client && yarn start",
+    "server": "nodemon --ignore './client/*' app.js ",
     "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "/client/*"
+    ]
   },
   "author": "lakshit",
   "license": "ISC",
