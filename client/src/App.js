@@ -5,7 +5,7 @@ import { Route, NavLink, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Register from "./components/register";
 import AddProduct from "./components/add-product";
-import Home from "./components/home";
+import Home from "./components/Home";
 import Login from "./components/login";
 import Shop from "./components/shop";
 import Cart from "./components/cart";
