@@ -70,6 +70,11 @@ app.use((req, res, next) => {
 app.use(login);
 app.use(shop);
 
+app.use(express.static(path.join(__dirname, "client", "build")));
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+
 mongoose
   .connect(
     "mongodb+srv://ray:ray@cluster0-uzqum.mongodb.net/shop?retryWrites=tr",
