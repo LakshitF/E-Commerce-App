@@ -189,33 +189,31 @@ class Shop extends Component {
           flexDirection: "row"
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            position: "absolute",
-            alignSelf: "left",
-            width: 200
-          }}
-        >
-          <h3>Category</h3>
-          <span style={{ fontSize: "20" }}>
+        <div className="shopcont">
+          <h3 style={{marginTop:"30px",marginLeft:"20%"}}>Category</h3>
+          <span className="shopcont2">
             <NavLink
-              style={{ textDecoration: "none" }}
               to={`/shop/?category=TV`}
             >
               TV
             </NavLink>
           </span>
-          <span style={{ fontSize: "20" }}>
+          <span className="shopcont2">
             <NavLink
-              style={{ textDecoration: "none" }}
               to={`/shop/?category=mobiles`}
             >
               Mobiles
             </NavLink>
           </span>
+          <span className="shopcont2">
+            <NavLink
+              to={`/shop/?category=headphones`}
+            >
+              Headphones
+            </NavLink>
+          </span>
         </div>
+
         {this.state.loading === true && (
           <div
             style={{
@@ -243,7 +241,7 @@ class Shop extends Component {
               flexDirection: "column",
               position: "absolute",
               left: "20%",
-              height: 550,
+              height: 600,
               width: 1100
             }}
           >
