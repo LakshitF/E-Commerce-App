@@ -1,31 +1,43 @@
 .gridcontainer {
   display: inline-grid;
-  grid-template-columns: 22% 22% 22% 22%;
+  grid-template-columns: 25% 25% 25% 25%;
   background-color: #ffffff;
   padding: 10px;
   grid-row-gap: 40px;
+  grid-column-gap: 20px;
 }
 
 .imgitem {
-  width: 90%;
-  height: 100%;
+  max-width: 180px !important;
+  max-height: 180px !important;
   min-width: 180px !important;
-  min-height: 240px !important;
+  min-height: 180px !important;
+  height:180px;
 }
 
+.wrapimg{
+  max-width: 180px !important;
+  max-height: 180px !important;
+  height:190px;
+  min-width: 180px !important;
+  min-height: 180px !important;
+}
 .griditem {
   box-shadow: 3px 3px 2px grey;
   background-color: rgba(255, 255, 255, 0.8);
   border: 0.2px solid rgba(255, 255, 255, 1);
   font-size: 20px;
   margin-top: 10px;
-  margin-right: 20px;
   align-content: center;
   align-items: center;
+  position: relative;
+  display:flex;
+  flex-direction: column;
 }
 
 .griditem:hover {
   border-style: solid;
+  position:relative;
   border-width: thin;
   border-color: black;
 }
@@ -62,4 +74,37 @@
 
 .misc {
   display: flex;
+}
+
+.prod{
+  position:relative;
+  align-items: flex-start;
+  min-height:120px;
+}
+
+.prodform{
+  position:relative;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+/* Styles for product details */
+.cont1{
+  position:relative;
+  display:flex;
+  margin-top: 20px;
+  flex-direction: row;
+}
+.cont2{
+  position: relative;
+  align-self: left;
+  min-width: 400px;
+  min-height: 400px;
+  max-width: 400px;
+  max-height: 400px;
+}
+.cont3{
+  position: relative;
+  align-self: right;
+  margin-top: 40px;
 }

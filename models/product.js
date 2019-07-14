@@ -1,6 +1,7 @@
 const mongodb=require('mongodb');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+let slug = require("mongoose-slug-generator");
 
 const productSchema = new Schema({
   title: {
@@ -22,7 +23,12 @@ const productSchema = new Schema({
   category:{
     type:String,
     required:true
-  }
+  },
+  slug: {
+    type: String,
+    slug: "title",
+    unique: true
+  },
 },{collection:'products'});
 
 module.exports = mongoose.model('Product', productSchema);

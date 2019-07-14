@@ -20,30 +20,20 @@ function Product(props) {
   return (
     <div
       className="griditem"
-      style={{
-        justifyContent: "center",
-        display: "flex",
-        flexDirection: "column"
-      }}
     >
-      <img class="imgitem" src={props.img} style={{ alignSelf: "center" }} />
-      <div style={{ textAlign: "center" }}>
-        <span style={{ display: "inline-block", fontSize: 20, color: "blue" }}>
+    <div class="wrapimg">
+      <img class="imgitem" src={props.img} />
+    </div>
+      <div class="prod">
+        <span style={{fontSize: 20, color: "blue" }}>
           {props.title}
         </span>
         <br />
-        <span style={{ fontSize: 22, display: "inline-block" }}>
+        <span style={{ fontSize: 22 }}>
           ${props.price}
         </span>
       </div>
-      <div
-        style={{
-          marginBottom: "10px",
-          marginTop: "10px",
-          alignItems: "center",
-          alignSelf: "center"
-        }}
-      >
+      <div class="prodform">
         <form action="/addToCart" method="post" target="hiddenFrame">
           <Button variant="contained" color="primary" type="submit">
             Add to Cart
@@ -68,25 +58,41 @@ class Shop extends Component {
       hasNextPage: false,
       lastPage: "",
       nextPage: 2,
-      sort: 0
+      sort: 0,
+      alert:""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.setAlert=this.setAlert.bind(this);
   }
 
   handleInputChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  setAlert()
+  {
+    console.log("Not Logged In");
+    this.setState({
+      alert: (
+        <Alert variant="warning" style={{ fontSize: 24, alignSelf: "center" }}>
+          {" "}
+          You must be logged in to continue!{" "}
+        </Alert>
+      )
+    });
+  }
+
   componentDidUpdate() {
     //Always pay attention to what you read in the post! Read the full post. It was mentioned there to always check if this is the new url before calling set state. That will prevent the infinite loop.
     if (this.state.loading === true) return;
+
     let flag = 0;
     const values = queryString.parse(this.props.location.search);
     let sort = values.sort;
     let handle = values.page;
     let category = values.category;
     console.log(category);
-    console.log("did update");
+
     if (typeof sort === "undefined") sort = 1;
     if (typeof handle === "undefined") handle = 1;
     if (typeof category === "undefined") category = "all";
@@ -101,6 +107,7 @@ class Shop extends Component {
     if (flag === 0) {
       return;
     }
+    console.log("did update");
     //yeah
     axios
       .get(`/api/shop/?page=${handle}&sort=${sort}&category=${category}`) //request
@@ -126,13 +133,13 @@ class Shop extends Component {
       });
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let sort = this.state.sort;
     const values = queryString.parse(this.props.location.search);
     let handle = values.page;
     let category = values.category;
     console.log(category);
-
+    console.log('before mount');
     if (typeof handle == "undefined") handle = 1;
     axios
       .get(`/api/shop/?page=${handle}&sort=${sort}&category=${category}`) //request
@@ -195,15 +202,15 @@ class Shop extends Component {
           <span style={{ fontSize: "20" }}>
             <NavLink
               style={{ textDecoration: "none" }}
-              to={`/shop/?category="Laptops"`}
+              to={`/shop/?category="TV"`}
             >
-              Laptops
+              TV
             </NavLink>
           </span>
           <span style={{ fontSize: "20" }}>
             <NavLink
               style={{ textDecoration: "none" }}
-              to={`/shop/?category="Headphones"`}
+              to={`/shop/?category="mobiles"`}
             >
               Mobiles
             </NavLink>
@@ -261,6 +268,7 @@ class Shop extends Component {
                 </NavLink>
               </a>
             </div>
+            {this.state.alert}
             <div className="gridcontainer" style={{ paddingTop: 10 }}>
               {items}
             </div>

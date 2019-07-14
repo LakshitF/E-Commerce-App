@@ -21,6 +21,24 @@ function ensureAdmin(req, res, next) {
   }
 }
 
+router.get("/api/products/:slug", (req, res, next) => {
+  console.log(req.params.slug);
+  Product.findOne({
+      slug: req.params.slug
+    })
+    .then(product => {
+      console.log(product);
+      return res.send({
+        product:product
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      return next();
+    });
+
+});
+
 router.get("/api/shop", (req, res, next) => {
   //react me bhi handle pass hua
   const page = +req.query.page || 1; //?page=1,,if req.query.handle--> gets

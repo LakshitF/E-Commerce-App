@@ -6,6 +6,7 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import { Alert } from "react-bootstrap";
 
 function Product(props) {
   return (
@@ -63,7 +64,7 @@ class Cart extends Component {
         //this dereferencing is super important
         if (data.loggedIn === false) {
           this.setState({
-            alert: "<span> You must be logged in to continue! </span>"
+            alert: "<Alert > Removed </Alert>"
           });
         } else {
           this.setState({ alert: "" });
@@ -76,10 +77,10 @@ class Cart extends Component {
         console.log("Not Logged In");
         this.setState({
           alert: (
-            <span style={{ fontSize: 24, alignSelf: "center" }}>
+            <Alert variant="warning" style={{ fontSize: 24, alignSelf: "center" }}>
               {" "}
               You must be logged in to continue!{" "}
-            </span>
+            </Alert>
           )
         });
       });
