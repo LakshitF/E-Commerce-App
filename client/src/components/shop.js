@@ -202,7 +202,7 @@ class Shop extends Component {
           <span style={{ fontSize: "20" }}>
             <NavLink
               style={{ textDecoration: "none" }}
-              to={`/shop/?category="TV"`}
+              to={`/shop/?category=TV`}
             >
               TV
             </NavLink>
@@ -210,7 +210,7 @@ class Shop extends Component {
           <span style={{ fontSize: "20" }}>
             <NavLink
               style={{ textDecoration: "none" }}
-              to={`/shop/?category="mobiles"`}
+              to={`/shop/?category=mobiles`}
             >
               Mobiles
             </NavLink>

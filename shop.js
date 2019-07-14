@@ -44,10 +44,10 @@ router.get("/api/shop", (req, res, next) => {
   const page = +req.query.page || 1; //?page=1,,if req.query.handle--> gets
   const k = +req.query.sort || 0;
   let category="all";
-  // if (req.query.category !== "undefined") category = req.query.category;
-  // else {
-  //   category = "all";
-  // }
+  if (req.query.category !== "undefined") category = req.query.category;
+  else {
+    category = "all";
+  }
   console.log(category);
   Product.find()
     .countDocuments()
