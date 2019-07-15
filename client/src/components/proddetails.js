@@ -29,6 +29,15 @@ class ProdDetails extends Component {
       <div className="cont3">
         <h2>{this.state.product.title}</h2>
         <span>{this.state.product.description}</span>
+        
+        <div class="prodform">
+          <form action="/addToCart" method="post" target="hiddenFrame">
+            <Button variant="contained" color="primary" type="submit">
+              Add to Cart
+            </Button>
+            <input type="hidden" name="productId" value={props._id} />
+          </form>
+        </div>
       </div>
       </div>
     );
