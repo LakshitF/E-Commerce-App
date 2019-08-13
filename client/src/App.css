@@ -1,3 +1,26 @@
+/* home page animation */
+.cf{
+  position:relative;
+}
+.homeimg{
+  display: inline-block;
+  align-self: center;
+
+  margin-bottom: 40px;
+  width:800px;
+  height:400px;
+  animation:changingImg 4s infinite;
+}
+
+@keyframes changingImg{
+  0%{
+    background-image:url("/images/backlogin.jpg");
+  }
+  100%{
+    background-image:url("/images/backlogin2.jpg");
+  }
+}
+
 .shopcont{
   display: flex;
   flex-direction: column;

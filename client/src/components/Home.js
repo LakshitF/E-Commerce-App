@@ -8,41 +8,16 @@ class Home extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    let images = ["/images/backlogin.jpg", "/images/k1.jpg"];
-    let i = 0;
-    let l = images.length;
-    let doc = document.getElementById("back");
-    setInterval(function() {
-      if (l == i) {
-        i = 0;
-        doc.src = images[i];
-        i++;
-      } else {
-        doc.src = images[i];
-        i++;
-        console.log("image changed");
-      }
-    }, 3000);
-  }
-
   render() {
     return (
       <div
         style={{ display: "flex", flexDirection: "column", marginBottom: 100 }}
       >
-        <img
-          id="back"
+
+        <img class="homeimg"
           src=""
-          style={{
-            display: "inline-block",
-            alignSelf: "center",
-            justifyContent: "center",
-            marginBottom: "40px"
-          }}
-          width={800}
-          height={400}
         />
+
         <span style={{ alignSelf: "center", marginBottom: "8px" }}>
           Welcome to NODEKART
         </span>
@@ -55,6 +30,9 @@ class Home extends Component {
         <div
           style={{ display: "flex", flexDirection: "row", alignSelf: "center" }}
         >
+        <NavLink
+          to={`/shop/?category=TV`}
+        >
           <div
             class="griditem2"
             style={{
@@ -63,17 +41,22 @@ class Home extends Component {
               marginRight: "40px"
             }}
           >
-            <img src="../images/cat1.jpg" width={95} height={180} />
+            <img src="../images/cat1.jpg" width={135} height={180} />
             <span
               style={{
                 display: "inline-block",
+                textAlign:"center",
                 fontSize: 18,
                 color: "blue"
               }}
             >
-              Laptops
+              TV
             </span>
           </div>
+          </NavLink>
+          <NavLink
+            to={`/shop/?category=headphones`}
+          >
           <div
             class="griditem2"
             style={{
@@ -82,18 +65,25 @@ class Home extends Component {
               marginRight: "40px"
             }}
           >
-            <img src="../images/cat2.jpg" width={110} height={180} />
+            <img src="../images/cat2.jpg" width={135} height={180} />
+
             <span
               style={{
                 display: "inline-block",
                 fontSize: 18,
                 color: "blue",
+                textAlign:"center",
                 bottom: "1"
               }}
             >
               Headphones
             </span>
+
           </div>
+        </NavLink>
+        <NavLink
+          to={`/shop/?category=mobiles`}
+        >
           <div
             class="griditem2"
             style={{
@@ -102,18 +92,20 @@ class Home extends Component {
               marginRight: "40px"
             }}
           >
-            <img src="../images/cat3.jpg" width={110} height={180} />
+            <img src="../images/cat3.jpg" width={135} height={180} />
             <span
               style={{
                 display: "inline-block",
                 fontSize: 18,
                 color: "blue",
+                textAlign:"center",
                 bottom: "1"
               }}
             >
               Mobiles
             </span>
           </div>
+          </NavLink>
         </div>
       </div>
     );
