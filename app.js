@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "static"))); //allows all files inside static folder to be linked using href
 
 const PORT = process.env.PORT || 3000;
-
+//"server": "nodemon --ignore './client/*' app.js ",
 const store = new mongostore({
   uri: murl,
   collection: "sessions"
@@ -70,10 +70,10 @@ app.use((req, res, next) => {
 app.use(login);
 app.use(shop);
 
-app.use(express.static(path.join(__dirname, "client", "build")));
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+// app.use(express.static(path.join(__dirname, "client", "build")));
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+// });
 
 mongoose
   .connect(
