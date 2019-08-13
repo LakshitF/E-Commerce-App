@@ -22,7 +22,7 @@ function Product(props) {
       className="griditem"
     >
     <div class="wrapimg">
-      <img class="imgitem" src={props.img}></img>
+      <a href={`/products/${props.slug}`}><img class="imgitem" src={props.img}></img></a>
     </div>
       <div class="prod">
         <span style={{fontSize: 20, color: "blue" }}>
@@ -176,6 +176,7 @@ class Shop extends Component {
           title={product.title}
           description={product.description}
           _id={product._id}
+          slug={product.slug}
         />
       );
     });

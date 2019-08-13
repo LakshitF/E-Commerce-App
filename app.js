@@ -69,11 +69,15 @@ app.use((req, res, next) => {
 
 app.use(login);
 app.use(shop);
+//All requests except apis will be handled by index.html
+if(process.env.ORIG==="nodekart.herokuapp.com")
+{
+  app.use(express.static(path.join(__dirname, "client", "build")));
+  app.get("*", (req, res) => {
+      res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
 
-// app.use(express.static(path.join(__dirname, "client", "build")));
-// app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-// });
+}
 
 mongoose
   .connect(
