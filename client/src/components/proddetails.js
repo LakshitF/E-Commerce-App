@@ -5,6 +5,7 @@ import {
   NavLink
 } from "react-router-dom";
 import "../css/main.css";
+import "../App.css";
 import Button from '@material-ui/core/Button';
 import {
   withStyles

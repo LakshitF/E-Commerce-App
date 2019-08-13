@@ -22,7 +22,7 @@ function Product(props) {
       className="griditem"
     >
     <div class="wrapimg">
-      <a href={`/products/${props.slug}`}><img class="imgitem" src={props.img}></img></a>
+      <NavLink to={`/products/${props.slug}`}><img class="imgitem" src={props.img}></img></NavLink>
     </div>
       <div class="prod">
         <span style={{fontSize: 20, color: "blue" }}>

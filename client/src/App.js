@@ -35,6 +35,7 @@ class App extends Component {
           <Route exact path="/shop" component={Shop} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/reset" component={Reset} />
+          <Route exact path="/products/:slug" component={ProdDetails} />
           <Route exact path="/resetPass/:token" component={ResetPass} />
           <Route exact path="/details/:slug" component={ProdDetails} />
           <Route exact path="/" component={Home} />
