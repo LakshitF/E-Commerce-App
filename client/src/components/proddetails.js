@@ -65,11 +65,12 @@ class ProdDetails extends Component {
       color = "primary"
       type = "submit" >
       Add to Cart <
-      /Button> <
+      /Button>
+      <
       input type = "hidden"
       name = "productId"
       value = {
-        props._id
+        this.props._id
       }
       /> <
       /form> <
