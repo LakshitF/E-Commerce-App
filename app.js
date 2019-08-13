@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "static"))); //allows all files inside static folder to be linked using href
 
 const PORT = process.env.PORT || 3000;
-//"server": "nodemon --ignore './client/*' app.js ",
+
 const store = new mongostore({
   uri: murl,
   collection: "sessions"
