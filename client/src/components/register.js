@@ -55,7 +55,7 @@ class Register extends Component {
             style={{}}
             name="username"
             label="Username"
-            type="email"
+            type="text"
             onChange={this.handleInputChange}
             margin="normal"
           />
