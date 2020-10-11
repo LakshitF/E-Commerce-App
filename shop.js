@@ -39,6 +39,23 @@ router.get("/api/products/:slug", (req, res, next) => {
 
 });
 
+// Return a list of all products we have to offer
+router.get("/api/allProducts/", (req, res, next) => {
+  console.log(req.params.slug);
+  Product.find({
+    })
+    .then(products => {
+      return res.send({
+        products:products
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      return next();
+    });
+
+});
+
 router.get("/api/productsSearch/:title", (req, res, next) => {
   console.log(req.params.title);
   Product.findOne({
