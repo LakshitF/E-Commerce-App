@@ -129,7 +129,7 @@ router.post("/api/login", (req, res, next) => {
 });
 
 router.get("/api/login", (req, res, next) => {
-  res.send({ log: req.session.isLoggedIn });
+  res.send({ log: req.session.isLoggedIn,loggedIn:true });
 });
 
 router.post("/api/signout", (req, res, next) => {
@@ -148,7 +148,7 @@ router.post("/api/signup", (req, res, next) => {
         return res.redirect("/login");
       }
       return bcrypt
-        .hash(req.body.password, 8)
+        .hash(req.body.password, 10)
         .then(hash => {
           const user = new User({
             username: req.body.username,
