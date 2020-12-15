@@ -18,11 +18,11 @@ const transporter = nodemailer.createTransport(
 router.post("/api/forgot", (req, res, next) => {
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
-      console.log(err);
+      throw new Error(err);
       res.redirect("/login");
     }
     const token = buffer.toString("hex");
-    console.log(req.body);
+   
     User.findOne({ email: req.body.email })
       .then(user => {
         if (!user) {
@@ -78,13 +78,14 @@ router.post("/api/newPassword", async (req, res, next) => {
     email: email
   })
     .then(user => {
-      if(user===null)
-        {
-          throw new Error('User not found');
-        }
+      try{
       resetUser = user;
       console.log("user with this token found ", user);
       return bcrypt.hash(newPassword, 12);
+      }
+      catch{
+                  throw new Error('User not found');
+      }
     })
     .then(hashedPassword => {
       resetUser.password = hashedPassword;
@@ -116,7 +117,7 @@ router.post("/api/login", (req, res, next) => {
           req.session.admin = true;
           console.log("Successfully logged in", req.session.user._id);
           req.session.save(err => {
-            console.log(err);
+            throw new Error(err);
             return res.redirect("/shop"); //render page again
           });
         } else {
