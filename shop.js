@@ -8,7 +8,7 @@ function ensureAuth(req, res, next) {
   if (req.session.isLoggedIn) {
     return next();
   } else {
-    console.log("You must be logged in to do this!");
+    res.json("You must be logged in to do this!");
     res.redirect("/add-product");
   }
 } //Similarly can add admin validation. All such validation should be done from the server side or the user can easily change such local variables
@@ -28,7 +28,7 @@ router.get("/api/products/:slug", (req, res, next) => {
     })
     .then(product => {
       console.log(product);
-      return res.send({
+      return res.json({
         product:product
       });
     })
@@ -63,7 +63,7 @@ router.get("/api/productsSearch/:title", (req, res, next) => {
     })
     .then(product => {
       console.log(product);
-      return res.send({
+      return res.json({
         product:product
       });
     })
@@ -103,7 +103,8 @@ router.get("/api/shop", (req, res, next) => {
       }
     })
     .then(products => {
-      res.send({
+      res.json
+      ({
         prods: products,
         currentPage: page,
         hasPreviousPage: page > 1,
@@ -143,7 +144,7 @@ router.post("/api/add-product", ensureAuth, (req, res, next) => {
 
 router.get("/api/cart", ensureAuth, (req, res, next) => {
   if (typeof req.user === "undefined") {
-    res.send({ loggedIn: false });
+    res.json({ loggedIn: false });
     console.log("not logged in");
     return next();
   }
@@ -153,7 +154,7 @@ router.get("/api/cart", ensureAuth, (req, res, next) => {
     .execPopulate()
     .then(user => {
       const products = user.cart.items;
-      res.send({ cart: products, loggedIn: true });
+      res.json({ cart: products, loggedIn: true });
     })
     .catch(err => console.log(err));
 });
